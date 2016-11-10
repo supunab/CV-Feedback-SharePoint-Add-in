@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package dslVersion="1.0.0.0" 
+        Id="349a9eb9-a77c-4cbb-b33c-e8f3c824e0a6" 
+        solutionId="349a9eb9-a77c-4cbb-b33c-e8f3c824e0a6" 
+        xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel" 
+        name="SPSecond"
+        sharePointProductVersion="16.0">
+  <features>
+        <featureReference itemId="a106f833-8a6e-4247-aa29-da669ed048a2" />
+  </features>
+</package>
