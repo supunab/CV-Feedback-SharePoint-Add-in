@@ -2,5 +2,7 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="Content">
     <File Path="Content\App.css" Url="Content/App.css" ReplaceContent="TRUE" />
+    <File Path="Content\uploadCV.css" Url="Content/uploadCV.css" ReplaceContent="TRUE" />
+    <File Path="Content\cvStatus.css" Url="Content/cvStatus.css" ReplaceContent="TRUE" />
   </Module>
 </Elements>

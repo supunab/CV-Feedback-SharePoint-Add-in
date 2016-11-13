@@ -12,15 +12,13 @@ var appWebUrl;
 var hostWebUrl;
 
 $(document).ready(function () {
-    var pageLinkHref = "UploadCV.aspx?" + document.URL.split("?")[1];
-    $("#pageLink").attr("href", pageLinkHref);
-
-    var pageLinkHref = "cvStatus.aspx?" + document.URL.split("?")[1];
-    $("#pageLink2").attr("href", pageLinkHref);
 
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
-        alert('This browser does not support the FileReader API.');
+        //alert('This browser does not support the FileReader API.');
+        $("#modalTitle").html("Browser Not Supported");
+        $("#modalText").html('This browser does not support the FileReader API.');
+        $("#alertModal").modal();
     }
 
     // Get the add-in web and host web URLs.
@@ -35,10 +33,6 @@ $(document).ready(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
     });
-
-    // Check whether this works
-    checkUploadStatus();
-
 });
 
 // Get parameters from the query string.
@@ -82,7 +76,11 @@ function uploadFileSuccess() {
                 // Change the display name and title of the list item.
                 var changeItem = updateListItem(listItem.d.__metadata);
                 changeItem.done(function (data, status, xhr) {
-                    alert('file uploaded and updated');
+                    //alert('file uploaded and updated');
+                    $("#loadingPic").hide();
+                    $("#modalTitle").html("CV Uploaded Successfully");
+                    $("#modalText").html('Your CV has been submitted successfully and you will get feedback soon from a email.');
+                    $("#alertModal").modal();
                 });
                 changeItem.fail(onError);
             });
@@ -190,40 +188,17 @@ function uploadFileSuccess() {
 
 // Display error messages.
 function onError(error) {
-    alert(error.responseText);
-}
-
-function checkUploadStatus() {
-    var hostWebContext = new SP.AppContextSite(clientContext, hostWebUrl);
-
-    cvList = hostWebContext.get_web().get_lists().getByTitle("CV List");
-
-    var camlQuery = new SP.CamlQuery();
-
-    cvItems = cvList.getItems(camlQuery);
-
-    clientContext.load(cvItems);
-    clientContext.executeQueryAsync(Function.createDelegate(this,checkUploadAccessSuccess), onFailed);
-}
-
-function checkUploadAccessSuccess() {
-    var enumerator = cvItems.getEnumerator();
-    
-    while (enumerator.moveNext()) {
-        var item = enumerator.get_current();
-        if (item.get_item("Email") === userEmail) {
-            $("#statusHeader").html(item.get_item("Status"));
-            return
-        }
-    }
-
-    // Email is not in the uploaded list, hence no upload is done
-    $("#statusHeader").html("You have not uploaded your CV");
+    //alert(error.responseText);
+    $("#modalTitle").html("Error");
+    $("#modalText").html(error.responseText);
+    $("#alertModal").modal();
 }
 
 function onFailed(sender, args) {
-    alert(args.get_message());
-
+    //alert(args.get_message());
+    $("#modalTitle").html("Error");
+    $("#modalText").html(args.get_message());
+    $("#alertModal").modal();
 }
 
 
@@ -239,7 +214,7 @@ function checkAndDeleteFile() {
 
 function checkAndDeleteSuccess() {
     var enumerator = cvItems.getEnumerator();
-    
+
     while (enumerator.moveNext()) {
         if (enumerator.get_current().get_item("Email") == userEmail) {
             enumerator.get_current().deleteObject();
@@ -252,21 +227,3 @@ function checkAndDeleteSuccess() {
     uploadFileSuccess();
 
 }
-
-/*
-function checkAndDeleteFile() {
-    var requrl = hostWebUrl + "/_api/web/lists/getByTitle('CV List')/items?$filter=Email eq '" + userEmail+"'";
-
-    item = $.ajax({
-        url: requrl,
-        type: "POST",
-        headers: {
-            "accept": "application/json;odata=verbose",
-            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
-            "X-HTTP-Method": "DELETE"
-        },
-
-    });
-
-}
-*/

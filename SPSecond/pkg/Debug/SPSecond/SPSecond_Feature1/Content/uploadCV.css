@@ -1,0 +1,19 @@
+﻿#suiteBarDelta, #s4-ribbonrow, #titleAreaBox, #s4-titlerow{
+    display: none;
+}
+
+.padding-bottom{
+    padding-bottom: 15px;
+}
+
+p {
+    padding-top: 6px;
+}
+
+.select-bottom-margin{
+    margin-bottom: 14px;
+}
+
+#getFile{
+    padding-top: 5px;
+}

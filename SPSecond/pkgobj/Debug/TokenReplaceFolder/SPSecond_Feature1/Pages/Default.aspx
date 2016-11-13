@@ -16,7 +16,6 @@
     <!-- Add your CSS styles to the following file -->
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
 
-    <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="../Scripts/App.js"></script>
 </asp:Content>
 
@@ -28,10 +27,29 @@
 <%-- The markup and script in the following Content element will be placed in the <body> of the page --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
 
+    <a id="pageLink" href="">Go to upload CV page</a>
+    <a id="pageLink2" href="">Go to Check status</a>
+
     <div>
         <input id="getFile" type="file" accept=".pdf"/><br />
-        <input id="displayName" type="text" value="Enter a unique name" /><br />
+        <input id="studentName" type="text" value="Enter your name" /><br />
+
+        <select id ="batch">
+            <option value="14">14</option>
+            <option value="14">15</option>
+            <option value="14">16</option>
+            <option value="14">17</option>
+            <option value="14">18</option>
+        </select>
+
         <input id="addFileButton" type="button" value="Upload" onclick="uploadFile()"/>
+
+        <select id="cvType">
+            <option value="career">Career</option>
+            <option value="internship">Internship</option>
+            <option value="masters">Masters</option>
+        </select>
+
     </div>
 
     <div>

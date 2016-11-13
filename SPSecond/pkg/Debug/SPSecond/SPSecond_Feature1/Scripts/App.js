@@ -12,6 +12,11 @@ var appWebUrl;
 var hostWebUrl;
 
 $(document).ready(function () {
+    var pageLinkHref = "UploadCV.aspx?" + document.URL.split("?")[1];
+    $("#pageLink").attr("href", pageLinkHref);
+
+    var pageLinkHref = "cvStatus.aspx?" + document.URL.split("?")[1];
+    $("#pageLink2").attr("href", pageLinkHref);
 
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
@@ -45,19 +50,21 @@ function getQueryStringParameter(paramToRetrieve) {
     }
 }
 
-// Upload the file.
+
 function uploadFile() {
-
-    // Check and remove currently uploaded files.
+    // Check and remove currently uploaded files. (File will get uploaded inside the below fun)
     checkAndDeleteFile();
+}
 
+
+function uploadFileSuccess() {
     // Define the folder path for this example.
     var serverRelativeUrlToFolder = 'CV List';
 
     // Get test values from the file input and text input page controls.
     // The display name must be unique every time you run the example.
-    var fileInput = jQuery('#getFile');
-    var newName = jQuery('#displayName').val();
+    var fileInput = $('#getFile');
+    var newName = userEmail.split(".")[0] + userEmail.split(".")[1].split("@")[0];
 
     // Initiate method calls using jQuery promises.
     // Get the local file as an array buffer.
@@ -87,7 +94,7 @@ function uploadFile() {
 
     // Get the local file as an array buffer.
     function getFileBuffer() {
-        var deferred = jQuery.Deferred();
+        var deferred = $.Deferred();
         var reader = new FileReader();
         reader.onloadend = function (e) {
             deferred.resolve(e.target.result);
@@ -114,14 +121,14 @@ function uploadFile() {
 
         // Send the request and return the response.
         // This call returns the SharePoint file.
-        return jQuery.ajax({
+        return $.ajax({
             url: fileCollectionEndpoint,
             type: "POST",
             data: arrayBuffer,
             processData: false,
             headers: {
                 "accept": "application/json;odata=verbose",
-                "X-RequestDigest": jQuery("#__REQUESTDIGEST").val(),
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
                 //"content-length": arrayBuffer.byteLength
             }
         });
@@ -140,7 +147,7 @@ function uploadFile() {
             appWebUrl, hostWebUrl);
 
         // Send the request and return the response.
-        return jQuery.ajax({
+        return $.ajax({
             url: listItemAllFieldsEndpoint,
             type: "GET",
             headers: { "accept": "application/json;odata=verbose" }
@@ -160,21 +167,22 @@ function uploadFile() {
         // The example gets the list item type from the item's metadata, but you can also get it from the
         // ListItemEntityTypeFullName property of the list.
 
-        var body = String.format("{{'__metadata':{{'type':'{0}'}},'FileLeafRef':'{1}','Title':'{2}','Email':'{3}'}}",
-            itemMetadata.type, newName, newName, userEmail);
+        var body = String.format("{{'__metadata':{{'type':'{0}'}},'FileLeafRef':'{1}','Title':'{2}','Email':'{3}','CV_x0020_Type':'{4}','Batch':'{5}','Student_x0020_Name':'{6}'}}",
+            itemMetadata.type, newName, newName, userEmail, $("#cvType").find(":selected").text(), $("#batch").find(":selected").text(), $("#studentName").val());
 
         // Send the request and return the promise.
         // This call does not return response content from the server.
-        return jQuery.ajax({
+        return $.ajax({
             url: listItemEndpoint,
             type: "POST",
             data: body,
             headers: {
-                "X-RequestDigest": jQuery("#__REQUESTDIGEST").val(),
+                "X-RequestDigest": $("#__REQUESTDIGEST").val(),
                 "content-type": "application/json;odata=verbose",
                 //"content-length": body.length,
                 "IF-MATCH": itemMetadata.etag,
-                "X-HTTP-Method": "MERGE"
+                "X-HTTP-Method": "MERGE",
+                "If-Match": "*"
             }
         });
     }
@@ -191,6 +199,7 @@ function checkUploadStatus() {
     cvList = hostWebContext.get_web().get_lists().getByTitle("CV List");
 
     var camlQuery = new SP.CamlQuery();
+
     cvItems = cvList.getItems(camlQuery);
 
     clientContext.load(cvItems);
@@ -199,17 +208,17 @@ function checkUploadStatus() {
 
 function checkUploadAccessSuccess() {
     var enumerator = cvItems.getEnumerator();
-
+    
     while (enumerator.moveNext()) {
         var item = enumerator.get_current();
         if (item.get_item("Email") === userEmail) {
             $("#statusHeader").html(item.get_item("Status"));
             return
         }
-
-        // Email is not in the uploaded list, hence no upload is done
-        $("#statusHeader").html("You have not uploaded your CV");
     }
+
+    // Email is not in the uploaded list, hence no upload is done
+    $("#statusHeader").html("You have not uploaded your CV");
 }
 
 function onFailed(sender, args) {
@@ -217,30 +226,47 @@ function onFailed(sender, args) {
 
 }
 
+
 function checkAndDeleteFile() {
     var hostClientContext = new SP.AppContextSite(clientContext, hostWebUrl);
-
     cvList = hostClientContext.get_web().get_lists().getByTitle("CV List");
-    
-    
-    var qry = String.format("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Single Line of Text'>{1}</Value></Eq></Where></Query>", userEmail);
-    camlQuery = new SP.CamlQuery();
-    camlQuery.set_viewXml(qry);
 
-    cvItems = cvList.getItems(camlQuery);
+    cvItems = cvList.getItems(new SP.CamlQuery());
+
     clientContext.load(cvItems);
-
     clientContext.executeQueryAsync(Function.createDelegate(this, checkAndDeleteSuccess), onFailed);
-
 }
 
 function checkAndDeleteSuccess() {
     var enumerator = cvItems.getEnumerator();
+    
+    while (enumerator.moveNext()) {
+        if (enumerator.get_current().get_item("Email") == userEmail) {
+            enumerator.get_current().deleteObject();
+            clientContext.executeQueryAsync(uploadFileSuccess, onFailed);
+            return
+        }
 
-    if (enumerator.moveNext()) {
-        console.log(enumerator.get_current());
-        enumerator.get_current().deleteObject();
     }
+
+    uploadFileSuccess();
 
 }
 
+/*
+function checkAndDeleteFile() {
+    var requrl = hostWebUrl + "/_api/web/lists/getByTitle('CV List')/items?$filter=Email eq '" + userEmail+"'";
+
+    item = $.ajax({
+        url: requrl,
+        type: "POST",
+        headers: {
+            "accept": "application/json;odata=verbose",
+            "X-RequestDigest": $("#__REQUESTDIGEST").val(),
+            "X-HTTP-Method": "DELETE"
+        },
+
+    });
+
+}
+*/

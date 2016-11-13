@@ -1,0 +1,7 @@
+﻿#suiteBarDelta, #s4-ribbonrow, #titleAreaBox, #s4-titlerow{
+    display: none;
+}
+
+#feedbackpanel{
+    margin-top: 15px;
+}

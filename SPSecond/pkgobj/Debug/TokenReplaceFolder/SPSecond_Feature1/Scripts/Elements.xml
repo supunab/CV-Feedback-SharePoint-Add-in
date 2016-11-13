@@ -6,5 +6,8 @@
     <File Path="Scripts\jquery-1.9.1.min.js" Url="Scripts/jquery-1.9.1.min.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-1.9.1.js" Url="Scripts/jquery-1.9.1.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-1.9.1.intellisense.js" Url="Scripts/jquery-1.9.1.intellisense.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\uploadCV.js" Url="Scripts/uploadCV.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\uploadCVView.js" Url="Scripts/uploadCVView.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\cvStatus.js" Url="Scripts/cvStatus.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

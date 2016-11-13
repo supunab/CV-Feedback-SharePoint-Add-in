@@ -47,6 +47,10 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7d6d69cf-5b66-4cbf-a429-054037e628f8}</SharePointProjectItemId>
     </None>
+    <Content Include="Content\cvStatus.css" />
+    <Content Include="Content\uploadCV.css" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Pages\cvStatus.aspx" />
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
   </ItemGroup>
@@ -55,11 +59,17 @@
     <None Include="Scripts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{13c0ba3a-59f4-45ae-bf8f-7707cd536bad}</SharePointProjectItemId>
     </None>
-    <Content Include="Scripts\Elements.xml" />
+    <Content Include="Pages\UploadCV.aspx" />
+    <Content Include="Scripts\cvStatus.js" />
+    <Content Include="Scripts\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\uploadCV.js" />
+    <Content Include="Scripts\uploadCVView.js" />
     <Content Include="Scripts\_references.js" />
   </ItemGroup>
   <ItemGroup>
