@@ -11,8 +11,10 @@ var userGroups;
 var appWebUrl;
 var hostWebUrl;
 
-$(document).ready(function () {
+// Wait till user details are loaded before uploading
+var userLoaded = false;
 
+$(document).ready(function () {
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
         //alert('This browser does not support the FileReader API.');
@@ -32,6 +34,8 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
+        // User details loading completed
+        userLoaded = true;
     });
 });
 
@@ -70,7 +74,13 @@ function checkAndDeleteFile() {
     var hostClientContext = new SP.AppContextSite(clientContext, hostWebUrl);
     cvList = hostClientContext.get_web().get_lists().getByTitle("CV List");
 
-    cvItems = cvList.getItems(new SP.CamlQuery());
+    while (!userLoaded) {
+        // Wait till user details are loaded
+    };
+
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
+    cvItems = cvList.getItems(camlQuery);
 
     clientContext.load(cvItems);
     clientContext.executeQueryAsync(Function.createDelegate(this, checkAndDeleteSuccess), onFailed);

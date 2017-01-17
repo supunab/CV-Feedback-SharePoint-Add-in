@@ -1,1 +1,7 @@
-﻿/* Place custom styles below */
+﻿#suiteBarDelta, #s4-ribbonrow, #titleAreaBox, #s4-titlerow{
+    display: none;
+}
+
+.padding-bottom{
+    padding-bottom: 15px;
+}

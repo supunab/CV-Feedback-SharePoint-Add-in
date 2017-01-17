@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    $("#homeBtn").attr("href", "default.aspx?" + document.URL.split("?")[1]);
+
     // Hide validation fail message
     $("#validationMsg").hide();
     $("#loadingPic").hide();

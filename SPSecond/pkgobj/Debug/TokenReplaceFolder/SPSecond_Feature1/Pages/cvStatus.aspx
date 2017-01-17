@@ -21,20 +21,17 @@
 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">
     <div class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-2"><h3>CV Status</h3></div>
+            <div class="col-md-2 col-md-offset-4"><h3>CV Status</h3></div>
             <div class="col-md-2">
                 <img src="../Images/loading.gif" id="loadingPic"/>
                 <h3 id="notUploaded"><span class="label label-danger">Not Uploaded</span></h3>
                 <h3 id="notReviewed"><span class="label label-default">Not Reviewed</span></h3>
                 <h3 id="reviewed"><span class="label label-success">Feedback Given</span></h3>
             </div>
-            <div class="col-md-4"></div>
         </div>
 
         <div class="row" id="feedbackpanel">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Received Feedback</h3>
@@ -44,9 +41,13 @@
                   </div>
                 </div>
             </div>
-            <div class="col-md-3"></div>
         </div>
 
-        <div></div>
+        <div class="row" style="margin-top:5%">
+            <div class="col-md-2 col-md-offset-5">
+                <a id="homeBtn" class="btn btn-primary btn-block" onclick="gotoHome()" href="">Goto Home</a>
+            </div>
+
+        </div>
     </div>
 </asp:Content>

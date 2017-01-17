@@ -17,3 +17,7 @@ p {
 #getFile{
     padding-top: 5px;
 }
+
+a:visited{
+    color: #ffffff;
+}

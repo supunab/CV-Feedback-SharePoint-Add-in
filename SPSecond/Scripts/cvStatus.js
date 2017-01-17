@@ -29,10 +29,10 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
-    });
 
-    // Check and update the view accordingly
-    checkUploadStatus();
+        // Check and update the view accordingly
+        checkUploadStatus();
+    });
 
 });
 
@@ -50,6 +50,7 @@ function checkUploadStatus() {
     cvList = hostWebContext.get_web().get_lists().getByTitle("CV List");
 
     var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
 
     cvItems = cvList.getItems(camlQuery);
 
@@ -73,7 +74,7 @@ function checkUploadAccessSuccess() {
     }
 
     // Email is not in the uploaded list, hence no upload is done
-    updateNotReviewedUI();
+    notUploadedUI();
 }
 
 function updateFeedbackGivenUI(feedback) {
