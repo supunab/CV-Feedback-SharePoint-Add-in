@@ -81,6 +81,7 @@ function updateFeedbackGivenUI(feedback) {
     $("#loadingPic").hide();
     $("#notUploaded").hide();
     $("#feedbackpanel").show();
+    $("#btnDownload").show();
     $("#reviewed").show();
     $("#feedbackbody").html(feedback);
 
@@ -91,6 +92,7 @@ function updateNotReviewedUI() {
     $("#feedbackpanel").hide();
     $("#notUploaded").hide();
     $("#notReviewed").show();
+    $("#btnDownload").show();
 
 }
 
@@ -98,10 +100,16 @@ function notUploadedUI() {
     $("#loadingPic").hide();
     $("#feedbackpanel").hide();
     $("#notReviewed").hide();
+    $("#btnDownload").hide();
     $("#notUploaded").show();
 }
 
 function onFailed(sender, args) {
     alert(args.get_message());
 
+}
+
+function downloadCV() {
+    window.open(hostWebUrl + "/CV%20List/" + userEmail.split('.')[0] + userEmail.split('@')[0].split('.')[1] + ".pdf");
+    return false; // To prevent refreshing the page when button press
 }
