@@ -12,7 +12,7 @@ var appWebUrl;
 var hostWebUrl;
 
 $(document).ready(function () {
-    $("#homeBtn").attr("href", "default.aspx?" + document.URL.split("?")[1]);
+    $("#homeBtn").attr("href", "studentView.aspx?" + document.URL.split("?")[1]);
     $("#feedbackpanel").hide();
     $("#notReviewed").hide();
     $("#reviewed").hide();
