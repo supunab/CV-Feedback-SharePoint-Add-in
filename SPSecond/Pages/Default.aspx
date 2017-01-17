@@ -13,10 +13,12 @@
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
     <meta name="WebPartPageExpansion" content="full" />
 
-    <!-- Add your CSS styles to the following file -->
+    <!-- Custom Styles file -->
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </asp:Content>
 
 <%-- The markup in the following Content element will be placed in the TitleArea of the page --%>
@@ -26,36 +28,22 @@
 
 <%-- The markup and script in the following Content element will be placed in the <body> of the page --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-
-    <a id="pageLink" href="">Go to upload CV page</a>
-    <a id="pageLink2" href="">Go to Check status</a>
-
-    <div>
-        <input id="getFile" type="file" accept=".pdf"/><br />
-        <input id="studentName" type="text" value="Enter your name" /><br />
-
-        <select id ="batch">
-            <option value="14">14</option>
-            <option value="14">15</option>
-            <option value="14">16</option>
-            <option value="14">17</option>
-            <option value="14">18</option>
-        </select>
-
-        <input id="addFileButton" type="button" value="Upload" onclick="uploadFile()"/>
-
-        <select id="cvType">
-            <option value="career">Career</option>
-            <option value="internship">Internship</option>
-            <option value="masters">Masters</option>
-        </select>
-
+    <div class="jumnotron text-center padding-bottom">
+        <h1>Welcome</h1>
     </div>
 
-    <div>
-        <h2 id="statusHeader">This will display the status of the cv</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <a id="pageLink" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Go to upload CV page</a>
+            </div>
+            <div class="col-md-3">
+                <a id="pageLink2" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go to Check status</a>
+            </div>
+        </div>
+        
     </div>
-
-
+    
+    
 
 </asp:Content>

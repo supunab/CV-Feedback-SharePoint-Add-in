@@ -25,6 +25,7 @@
             <div class="col-md-2"><h3>CV Status</h3></div>
             <div class="col-md-2">
                 <img src="../Images/loading.gif" id="loadingPic"/>
+                <h3 id="notUploaded"><span class="label label-danger">Not Uploaded</span></h3>
                 <h3 id="notReviewed"><span class="label label-default">Not Reviewed</span></h3>
                 <h3 id="reviewed"><span class="label label-success">Feedback Given</span></h3>
             </div>

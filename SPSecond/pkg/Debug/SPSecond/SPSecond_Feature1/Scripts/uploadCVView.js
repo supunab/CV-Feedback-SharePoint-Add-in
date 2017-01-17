@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     // Hide validation fail message
     $("#validationMsg").hide();
+    $("#loadingPic").hide();
 
     // Set batch years
     $("#batch").html(generateBatches());
@@ -43,6 +44,8 @@ function validateInputs() {
     }
 
     // Since there are no errors upload the file
+    $("#validationMsg").hide();
+    $("#loadingPic").show();
     uploadFile();
 
 }

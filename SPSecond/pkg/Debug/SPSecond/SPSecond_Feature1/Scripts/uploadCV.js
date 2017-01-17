@@ -50,9 +50,51 @@ function uploadFile() {
     checkAndDeleteFile();
 }
 
+// Display error messages.
+function onError(error) {
+    //alert(error.responseText);
+    $("#modalTitle").html("Error");
+    $("#modalText").html(error.responseText);
+    $("#alertModal").modal();
+}
+
+function onFailed(sender, args) {
+    //alert(args.get_message());
+    $("#modalTitle").html("Error");
+    $("#modalText").html(args.get_message());
+    $("#alertModal").modal();
+}
+
+
+function checkAndDeleteFile() {
+    var hostClientContext = new SP.AppContextSite(clientContext, hostWebUrl);
+    cvList = hostClientContext.get_web().get_lists().getByTitle("CV List");
+
+    cvItems = cvList.getItems(new SP.CamlQuery());
+
+    clientContext.load(cvItems);
+    clientContext.executeQueryAsync(Function.createDelegate(this, checkAndDeleteSuccess), onFailed);
+}
+
+function checkAndDeleteSuccess() {
+    var enumerator = cvItems.getEnumerator();
+
+    while (enumerator.moveNext()) {
+        if (enumerator.get_current().get_item("Email") == userEmail) {
+            enumerator.get_current().deleteObject();
+            clientContext.executeQueryAsync(uploadFileSuccess, onFailed);
+            return
+        }
+
+    }
+
+    // File not currently uploaded
+    uploadFileSuccess();
+
+}
 
 function uploadFileSuccess() {
-    // Define the folder path for this example.
+    // Define the folder path
     var serverRelativeUrlToFolder = 'CV List';
 
     // Get test values from the file input and text input page controls.
@@ -77,6 +119,7 @@ function uploadFileSuccess() {
                 var changeItem = updateListItem(listItem.d.__metadata);
                 changeItem.done(function (data, status, xhr) {
                     //alert('file uploaded and updated');
+                    $("#loadingPic").hide();
                     $("#modalTitle").html("CV Uploaded Successfully");
                     $("#modalText").html('Your CV has been submitted successfully and you will get feedback soon from a email.');
                     $("#alertModal").modal();
@@ -183,46 +226,4 @@ function uploadFileSuccess() {
             }
         });
     }
-}
-
-// Display error messages.
-function onError(error) {
-    //alert(error.responseText);
-    $("#modalTitle").html("Error");
-    $("#modalText").html(error.responseText);
-    $("#alertModal").modal();
-}
-
-function onFailed(sender, args) {
-    //alert(args.get_message());
-    $("#modalTitle").html("Error");
-    $("#modalText").html(args.get_message());
-    $("#alertModal").modal();
-}
-
-
-function checkAndDeleteFile() {
-    var hostClientContext = new SP.AppContextSite(clientContext, hostWebUrl);
-    cvList = hostClientContext.get_web().get_lists().getByTitle("CV List");
-
-    cvItems = cvList.getItems(new SP.CamlQuery());
-
-    clientContext.load(cvItems);
-    clientContext.executeQueryAsync(Function.createDelegate(this, checkAndDeleteSuccess), onFailed);
-}
-
-function checkAndDeleteSuccess() {
-    var enumerator = cvItems.getEnumerator();
-
-    while (enumerator.moveNext()) {
-        if (enumerator.get_current().get_item("Email") == userEmail) {
-            enumerator.get_current().deleteObject();
-            clientContext.executeQueryAsync(uploadFileSuccess, onFailed);
-            return
-        }
-
-    }
-
-    uploadFileSuccess();
-
 }

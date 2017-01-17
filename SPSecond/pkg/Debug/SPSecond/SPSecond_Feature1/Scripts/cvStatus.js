@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#feedbackpanel").hide();
     $("#notReviewed").hide();
     $("#reviewed").hide();
+    $("#notUploaded").hide();
 
     // Get the add-in web and host web URLs.
     appWebUrl = decodeURIComponent(getQueryStringParameter("SPAppWebUrl"));
@@ -61,7 +62,7 @@ function checkUploadAccessSuccess() {
     while (enumerator.moveNext()) {
         var item = enumerator.get_current();
         if (item.get_item("Email") === userEmail) {
-            if (item.get_item("Status") == "In Progress") {
+            if (item.get_item("Status") === "In Process") {
                 updateNotReviewedUI();
             } else {
                 updateFeedbackGivenUI(item.get_item("Feedback_x0020_Given"));
@@ -76,6 +77,7 @@ function checkUploadAccessSuccess() {
 
 function updateFeedbackGivenUI(feedback) {
     $("#loadingPic").hide();
+    $("#notUploaded").hide();
     $("#feedbackpanel").show();
     $("#reviewed").show();
     $("#feedbackbody").html(feedback);
@@ -85,8 +87,16 @@ function updateFeedbackGivenUI(feedback) {
 function updateNotReviewedUI() {
     $("#loadingPic").hide();
     $("#feedbackpanel").hide();
+    $("#notUploaded").hide();
     $("#notReviewed").show();
 
+}
+
+function notUploadedUI() {
+    $("#loadingPic").hide();
+    $("#feedbackpanel").hide();
+    $("#notReviewed").hide();
+    $("#notUploaded").show();
 }
 
 function onFailed(sender, args) {

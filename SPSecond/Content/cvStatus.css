@@ -5,3 +5,7 @@
 #feedbackpanel{
     margin-top: 15px;
 }
+
+a:visited{
+    color: #ffffff;
+}

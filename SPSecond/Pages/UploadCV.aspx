@@ -29,30 +29,25 @@
     
     <div class="container">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Upload your CV here</p>
             </div>
             <div class="col-md-3">
                 <input class="form-control" id="getFile" type="file" accept=".pdf"/><br />
             </div>
-            <div class="col-md-3"></div>
         </div>
         
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Enter your name</p>
             </div>
             <div class="col-md-3">
                 <input class="form-control" id="studentName" type="text" value="" /><br />
             </div>
-            <div class="col-md-3"></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Select CV Type</p>
             </div>
             <div class="col-md-3">
@@ -62,38 +57,32 @@
                     <option value="masters">Masters</option>
                 </select>
             </div>
-            <div class="col-md-3"></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Select Your Batch</p>
             </div>
             <div class="col-md-3">
                 <select class="form-control select-bottom-margin" id ="batch">
                 </select>
             </div>
-            <div class="col-md-3"></div>
         </div>
 
 
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-5">
+            <div class="col-md-5 col-md-offset-4">
                 <p id="validationMsg" class="text-danger">Please fill all the fields.</p>
                 <img src="../Images/loading.gif" alt="Uploading" id="loadingPic" style="display:block; margin-left:25%"/>
             </div>
-            <div class="col-md-3"></div>
         </div>
 
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-md-offset-4">
                 <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
             </div>
             <div class="col-md-2">
-                <button id="btnExit" type="button" class="btn btn-danger">Goto Home</button>
+                <a id="homeBtn" type="button" class="btn btn-danger">Goto Home</a>
             </div>
         </div>
 

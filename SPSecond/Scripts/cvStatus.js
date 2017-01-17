@@ -12,9 +12,11 @@ var appWebUrl;
 var hostWebUrl;
 
 $(document).ready(function () {
+    $("#homeBtn").attr("href", "default.aspx?" + document.URL.split("?")[1]);
     $("#feedbackpanel").hide();
     $("#notReviewed").hide();
     $("#reviewed").hide();
+    $("#notUploaded").hide();
 
     // Get the add-in web and host web URLs.
     appWebUrl = decodeURIComponent(getQueryStringParameter("SPAppWebUrl"));
@@ -76,6 +78,7 @@ function checkUploadAccessSuccess() {
 
 function updateFeedbackGivenUI(feedback) {
     $("#loadingPic").hide();
+    $("#notUploaded").hide();
     $("#feedbackpanel").show();
     $("#reviewed").show();
     $("#feedbackbody").html(feedback);
@@ -85,8 +88,16 @@ function updateFeedbackGivenUI(feedback) {
 function updateNotReviewedUI() {
     $("#loadingPic").hide();
     $("#feedbackpanel").hide();
+    $("#notUploaded").hide();
     $("#notReviewed").show();
 
+}
+
+function notUploadedUI() {
+    $("#loadingPic").hide();
+    $("#feedbackpanel").hide();
+    $("#notReviewed").hide();
+    $("#notUploaded").show();
 }
 
 function onFailed(sender, args) {
