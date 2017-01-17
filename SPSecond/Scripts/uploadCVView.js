@@ -35,6 +35,8 @@ function generateBatches() {
 }
 
 function validateInputs() {
+    $("#fileTypeAlert").show();
+
     if ($("#studentName").val().trim() == "") {
         $("#validationMsg").show();
         return
@@ -42,6 +44,11 @@ function validateInputs() {
 
     if ($("#getFile").get(0).files.length == 0) {
         $("#validationMsg").show();
+        return
+    }
+
+    if ($("#getFile").val().split('.')[1] != "pdf") {
+        $("#fileTypeAlert").show();
         return
     }
 
