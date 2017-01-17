@@ -5,6 +5,7 @@
     <ElementFile Location="Pages\Default.aspx" />
     <ElementFile Location="Pages\UploadCV.aspx" />
     <ElementFile Location="Pages\cvStatus.aspx" />
+    <ElementFile Location="Pages\StudentView.aspx" />
     <ElementManifest Location="Scripts\Elements.xml" />
     <ElementFile Location="Scripts\App.js" />
     <ElementFile Location="Scripts\jquery-1.9.1.min.map" />
@@ -14,6 +15,7 @@
     <ElementFile Location="Scripts\uploadCV.js" />
     <ElementFile Location="Scripts\uploadCVView.js" />
     <ElementFile Location="Scripts\cvStatus.js" />
+    <ElementFile Location="Scripts\DefaultScript.js" />
     <ElementManifest Location="Content\Elements.xml" />
     <ElementFile Location="Content\App.css" />
     <ElementFile Location="Content\uploadCV.css" />

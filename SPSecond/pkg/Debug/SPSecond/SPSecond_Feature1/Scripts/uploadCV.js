@@ -11,7 +11,7 @@ var userGroups;
 var appWebUrl;
 var hostWebUrl;
 
-// Wait till user details are loaded before uploading
+// Wait till user details are loaded before uploading. (Due to async execution)
 var userLoaded = false;
 
 $(document).ready(function () {

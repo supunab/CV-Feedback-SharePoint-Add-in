@@ -4,5 +4,6 @@
     <File Path="Pages\Default.aspx" Url="Pages/Default.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\UploadCV.aspx" Url="Pages/UploadCV.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\cvStatus.aspx" Url="Pages/cvStatus.aspx" ReplaceContent="TRUE" />
+    <File Path="Pages\StudentView.aspx" Url="Pages/StudentView.aspx" ReplaceContent="TRUE" />
   </Module>
 </Elements>

@@ -17,7 +17,7 @@
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="../Scripts/DefaultScript.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </asp:Content>
 
@@ -28,21 +28,11 @@
 
 <%-- The markup and script in the following Content element will be placed in the <body> of the page --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="jumnotron text-center padding-bottom">
-        <h1>Welcome</h1>
+    <div class="jumnotron text-center padding-bottom" style="margin-top:11%">
+        <h1>Loading...</h1>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-md-offset-3">
-                <a id="pageLink" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Go to upload CV page</a>
-            </div>
-            <div class="col-md-3">
-                <a id="pageLink2" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go to Check status</a>
-            </div>
-        </div>
-        
-    </div>
+    <img class="img-responsive center-block" src="../Images/loading.gif" id="loadingPic"/>
     
     
 

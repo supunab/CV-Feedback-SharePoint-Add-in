@@ -25,7 +25,7 @@ function generateBatches() {
     var year = new Date().getFullYear();
 
     // The select will have values starting from startYear to current year
-    var startYear = 2010;
+    var startYear = year - 6;
 
     for (startYear; startYear <= year ; startYear++) {
         markup += String.format("<option value='{0}'>{0}</option>", startYear);

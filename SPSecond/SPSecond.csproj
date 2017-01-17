@@ -59,8 +59,10 @@
     <None Include="Scripts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{13c0ba3a-59f4-45ae-bf8f-7707cd536bad}</SharePointProjectItemId>
     </None>
+    <Content Include="Pages\StudentView.aspx" />
     <Content Include="Pages\UploadCV.aspx" />
     <Content Include="Scripts\cvStatus.js" />
+    <Content Include="Scripts\DefaultScript.js" />
     <Content Include="Scripts\Elements.xml">
       <SubType>Designer</SubType>
     </Content>

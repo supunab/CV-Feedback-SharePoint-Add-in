@@ -27,7 +27,6 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
-        console.log(userGroups);
     });
 
 });

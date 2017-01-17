@@ -9,5 +9,6 @@
     <File Path="Scripts\uploadCV.js" Url="Scripts/uploadCV.js" ReplaceContent="TRUE" />
     <File Path="Scripts\uploadCVView.js" Url="Scripts/uploadCVView.js" ReplaceContent="TRUE" />
     <File Path="Scripts\cvStatus.js" Url="Scripts/cvStatus.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\DefaultScript.js" Url="Scripts/DefaultScript.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>
