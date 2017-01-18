@@ -43,6 +43,12 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="FeedbackList\FeedbackListInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9c64ff2e-3026-4b88-968d-1be06e4a36b2}</SharePointProjectItemId>
+    </None>
+    <None Include="FeedbackList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5cb50a82-24bd-49b3-80cf-3ead2b1b5d3f}</SharePointProjectItemId>
+    </None>
     <None Include="packages.config" />
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7d6d69cf-5b66-4cbf-a429-054037e628f8}</SharePointProjectItemId>
@@ -50,6 +56,9 @@
     <Content Include="Content\AluminaiView.css" />
     <Content Include="Content\cvStatus.css" />
     <Content Include="Content\uploadCV.css" />
+    <Content Include="FeedbackList\Elements.xml" />
+    <Content Include="FeedbackList\FeedbackListInstance\Elements.xml" />
+    <Content Include="FeedbackList\Schema.xml" />
     <Content Include="Pages\load.gif" />
     <Content Include="Images\loading.gif" />
     <Content Include="Pages\AluminaiView.aspx" />

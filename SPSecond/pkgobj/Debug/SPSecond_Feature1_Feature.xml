@@ -27,6 +27,9 @@
     <ElementManifest Location="Images\Elements.xml" />
     <ElementFile Location="Images\AppIcon.png" />
     <ElementFile Location="Images\loading.gif" />
+    <ElementManifest Location="FeedbackListInstance\Elements.xml" />
+    <ElementManifest Location="FeedbackList\Elements.xml" />
+    <ElementFile Location="FeedbackList\Schema.xml" />
   </ElementManifests>
   <UpgradeActions>
     <VersionRange>
@@ -35,6 +38,8 @@
         <ElementManifest Location="Scripts\Elements.xml" />
         <ElementManifest Location="Content\Elements.xml" />
         <ElementManifest Location="Images\Elements.xml" />
+        <ElementManifest Location="FeedbackListInstance\Elements.xml" />
+        <ElementManifest Location="FeedbackList\Elements.xml" />
       </ApplyElementManifests>
     </VersionRange>
   </UpgradeActions>

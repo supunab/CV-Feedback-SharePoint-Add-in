@@ -3,6 +3,9 @@
     display: none;
 }
 
+.padding-bottom{
+    padding-bottom: 15px;
+}
 
 .modal-dialog {
   width: 100%;

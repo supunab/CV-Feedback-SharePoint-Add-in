@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="FeedbackList" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/FeedbackList" Description="To maintain the count of feedbacks given by each user"></ListInstance>
+</Elements>

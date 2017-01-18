@@ -46,6 +46,51 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
+
+
+        // For testing
+        //clientContext = new SP.ClientContext(appWebUrl);
+        var feedbackList = clientContext.get_web().get_lists().getByTitle("FeedbackList");
+        // If not working, try get_lists().getByTitle("FeedbackList")
+        var camlQuery = new SP.CamlQuery();
+        camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
+
+        var entry = feedbackList.getItems(camlQuery);
+
+        clientContext.load(entry);
+
+        clientContext.executeQueryAsync(function () {
+            var enumerator = entry.getEnumerator();
+            //console.log(feedbackList.get_description());
+            // Can only exist one record
+            if (enumerator.moveNext()) {
+                // record exists, update
+                console.log("Came here");
+            } else {
+                // email not existing in the list , create the record
+                var itemCreateInfo = new SP.ListItemCreationInformation();
+                var listItem = feedbackList.addItem(itemCreateInfo);
+                listItem.set_item("Title", userEmail);
+                listItem.set_item("Count", 1);
+                listItem.set_item("LastDate", new Date());
+                listItem.update();
+
+                clientContext.load(listItem);
+                clientContext.executeQueryAsync(function () {
+                    alert("Success id : " + listItem.get_id());
+                },
+                function () {
+                    alert("List update failed");
+                }
+                )
+
+            };
+
+
+        },
+        function () {
+            alert("Error Occured");
+        });
     });
 
     // Check whether this works
@@ -265,7 +310,7 @@ function setCVData(item, num) {
     urlTo = urlTo.replace(' ', '%20');
     pdf[num - 1] = urlTo;
     this.item[num - 1] = item;
-    $('#pdf' + num).html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: 390px;background-position:center;"><object type="application/pdf" width="30%" height="200px" data="' + urlTo + '?#scrollbar=0&toolbar=0&navpanes=0&zoom=37" style="overflow:hidden; width: 100%; height: 390px;margin-top:20px;"></object></div>');
+    $('#pdf' + num).html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: 320px;background-position:center;"><object type="application/pdf" width="30%" height="50%" data="' + urlTo + '?#scrollbar=0&toolbar=0&navpanes=0&zoom=37" style="overflow:hidden; width: 100%; height: 90%;margin-top:20px;"></object></div>');
     //$('#pdf' + num).html('<object type="application/pdf" width="30%" height="200px" data="' + urlTo + '" style="overflow:hidden; width: 100%; height: 390px;"></object>');
 }
 function setNotAvailable(num) {
@@ -315,7 +360,9 @@ function doFilter(btnClicked) {
 }
 //Complete this.
 function saveFeddBackInDatabase(feedBack, item) {
-
+    // Update feedback to the host web list
+    
+    // Update feedback count for each user
 }
 
 // Validation and View Functions
