@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="col-md-2 col-md-offset-5">
-                <button class="btn btn-primary btn-block"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download CV</button>
+                <button id="btnDownload" style="display:none" onclick="return downloadCV()" class="btn btn-link btn-block"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download CV</button>
             </div>
 
         </div>

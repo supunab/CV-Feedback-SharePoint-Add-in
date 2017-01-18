@@ -6,5 +6,7 @@
     <ProjectItemFile Source="UploadCV.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="cvStatus.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="StudentView.aspx" Target="Pages\" Type="ElementFile" />
+    <ProjectItemFile Source="AluminaiView.aspx" Target="Pages\" Type="ElementFile" />
+    <ProjectItemFile Source="load.gif" Target="Pages\" Type="ElementFile" />
   </Files>
 </ProjectItem>

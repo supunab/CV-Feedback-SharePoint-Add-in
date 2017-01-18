@@ -35,6 +35,11 @@
             <div class="col-md-3">
                 <input class="form-control" id="getFile" type="file" accept=".pdf"/><br />
             </div>
+            <div class="col-md-3">
+                <div class="alert alert-danger" style="display:none;padding:1.5%;padding-left:2%;width:70%" id="fileTypeAlert">
+                    <strong>Only PDFs are allowed!</strong>
+                </div>
+            </div>
         </div>
         
         <div class="row">

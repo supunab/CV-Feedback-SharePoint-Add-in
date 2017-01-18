@@ -5,5 +5,7 @@
     <File Path="Pages\UploadCV.aspx" Url="Pages/UploadCV.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\cvStatus.aspx" Url="Pages/cvStatus.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\StudentView.aspx" Url="Pages/StudentView.aspx" ReplaceContent="TRUE" />
+    <File Path="Pages\AluminaiView.aspx" Url="Pages/AluminaiView.aspx" ReplaceContent="TRUE" />
+    <File Path="Pages\load.gif" Url="Pages/load.gif" ReplaceContent="TRUE" />
   </Module>
 </Elements>

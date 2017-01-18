@@ -11,5 +11,6 @@
     <ProjectItemFile Source="uploadCVView.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="cvStatus.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="DefaultScript.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="AluminaiView.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>
