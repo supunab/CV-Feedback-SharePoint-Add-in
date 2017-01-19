@@ -50,7 +50,7 @@ function checkUploadStatus() {
     cvList = hostWebContext.get_web().get_lists().getByTitle("CV List");
 
     var camlQuery = new SP.CamlQuery();
-    camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
+    camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query></View>");
 
     cvItems = cvList.getItems(camlQuery);
 

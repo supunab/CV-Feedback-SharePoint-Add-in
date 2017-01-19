@@ -5,5 +5,6 @@
     <File Path="Content\uploadCV.css" Url="Content/uploadCV.css" ReplaceContent="TRUE" />
     <File Path="Content\cvStatus.css" Url="Content/cvStatus.css" ReplaceContent="TRUE" />
     <File Path="Content\AluminaiView.css" Url="Content/AluminaiView.css" ReplaceContent="TRUE" />
+    <File Path="Content\AdminView.css" Url="Content/AdminView.css" ReplaceContent="TRUE" />
   </Module>
 </Elements>

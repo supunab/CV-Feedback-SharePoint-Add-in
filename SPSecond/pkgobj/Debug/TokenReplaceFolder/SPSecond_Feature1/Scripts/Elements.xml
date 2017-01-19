@@ -11,5 +11,6 @@
     <File Path="Scripts\cvStatus.js" Url="Scripts/cvStatus.js" ReplaceContent="TRUE" />
     <File Path="Scripts\DefaultScript.js" Url="Scripts/DefaultScript.js" ReplaceContent="TRUE" />
     <File Path="Scripts\AluminaiView.js" Url="Scripts/AluminaiView.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\AdminView.js" Url="Scripts/AdminView.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

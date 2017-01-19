@@ -36,5 +36,5 @@
     //});
 
     // For testing
-    window.location.replace("AluminaiView.aspx?" + document.URL.split("?")[1]);
+    window.location.replace("AdminView.aspx?" + document.URL.split("?")[1]);
 });

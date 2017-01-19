@@ -46,51 +46,6 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
-
-
-        // For testing
-        //clientContext = new SP.ClientContext(appWebUrl);
-        var feedbackList = clientContext.get_web().get_lists().getByTitle("FeedbackList");
-        // If not working, try get_lists().getByTitle("FeedbackList")
-        var camlQuery = new SP.CamlQuery();
-        camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
-
-        var entry = feedbackList.getItems(camlQuery);
-
-        clientContext.load(entry);
-
-        clientContext.executeQueryAsync(function () {
-            var enumerator = entry.getEnumerator();
-            //console.log(feedbackList.get_description());
-            // Can only exist one record
-            if (enumerator.moveNext()) {
-                // record exists, update
-                console.log("Came here");
-            } else {
-                // email not existing in the list , create the record
-                var itemCreateInfo = new SP.ListItemCreationInformation();
-                var listItem = feedbackList.addItem(itemCreateInfo);
-                listItem.set_item("Title", userEmail);
-                listItem.set_item("Count", 1);
-                listItem.set_item("LastDate", new Date());
-                listItem.update();
-
-                clientContext.load(listItem);
-                clientContext.executeQueryAsync(function () {
-                    alert("Success id : " + listItem.get_id());
-                },
-                function () {
-                    alert("List update failed");
-                }
-                )
-
-            };
-
-
-        },
-        function () {
-            alert("Error Occured");
-        });
     });
 
     // Check whether this works
@@ -361,8 +316,65 @@ function doFilter(btnClicked) {
 //Complete this.
 function saveFeddBackInDatabase(feedBack, item) {
     // Update feedback to the host web list
-    
+    item.set_item("Feedback_x0020_Given", feedBack);
+    item.set_item("Status", "Feedback Given");
+    item.update();
+
+    clientContext.executeQueryAsync(function () {
+        // success
+        }
+        , function () {
+            // Failed
+        });
+
     // Update feedback count for each user
+    var feedbackList = clientContext.get_web().get_lists().getByTitle("FeedbackList");
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Title' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query></View>");
+
+    var entry = feedbackList.getItems(camlQuery);
+
+    clientContext.load(entry);
+
+    clientContext.executeQueryAsync(function () {
+        var enumerator = entry.getEnumerator();
+        // Can only exist one record
+        if (enumerator.moveNext()) {
+            // record exists, update count
+            var listItem = enumerator.get_current();
+            var count = listItem.get_item("Count");
+            listItem.set_item("Count", count + 1);
+            listItem.update();
+            clientContext.executeQueryAsync(function () {
+                //success
+            },
+            function () {
+                // Failed
+            });
+
+        } else {
+            // email not existing in the list , create the record
+            var itemCreateInfo = new SP.ListItemCreationInformation();
+            var listItem = feedbackList.addItem(itemCreateInfo);
+            listItem.set_item("Title", userEmail);
+            listItem.set_item("Count", 1);
+            listItem.set_item("LastDate", new Date());
+            listItem.update();
+
+            clientContext.load(listItem);
+            clientContext.executeQueryAsync(function () {
+                //alert("Success id : " + listItem.get_id());
+            },
+            function () {
+                //alert("List update failed");
+            }
+            )
+
+        };
+    },
+    function () {
+        alert("Error Occured");
+    });
 }
 
 // Validation and View Functions

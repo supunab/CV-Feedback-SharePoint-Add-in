@@ -53,12 +53,14 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7d6d69cf-5b66-4cbf-a429-054037e628f8}</SharePointProjectItemId>
     </None>
+    <Content Include="Content\AdminView.css" />
     <Content Include="Content\AluminaiView.css" />
     <Content Include="Content\cvStatus.css" />
     <Content Include="Content\uploadCV.css" />
     <Content Include="FeedbackList\Elements.xml" />
     <Content Include="FeedbackList\FeedbackListInstance\Elements.xml" />
     <Content Include="FeedbackList\Schema.xml" />
+    <Content Include="Pages\AdminView.aspx" />
     <Content Include="Pages\load.gif" />
     <Content Include="Images\loading.gif" />
     <Content Include="Pages\AluminaiView.aspx" />
@@ -73,6 +75,7 @@
     </None>
     <Content Include="Pages\StudentView.aspx" />
     <Content Include="Pages\UploadCV.aspx" />
+    <Content Include="Scripts\AdminView.js" />
     <Content Include="Scripts\AluminaiView.js" />
     <Content Include="Scripts\cvStatus.js" />
     <Content Include="Scripts\DefaultScript.js" />

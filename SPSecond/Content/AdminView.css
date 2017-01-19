@@ -1,0 +1,8 @@
+﻿/* Hide Sharepoint logo and menu bar*/
+#suiteBarDelta, #s4-ribbonrow, #titleAreaBox, #s4-titlerow{
+    display: none;
+}
+
+.padding-bottom{
+    padding-bottom: 15px;
+}

@@ -8,5 +8,6 @@
     <ProjectItemFile Source="StudentView.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="AluminaiView.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="load.gif" Target="Pages\" Type="ElementFile" />
+    <ProjectItemFile Source="AdminView.aspx" Target="Pages\" Type="ElementFile" />
   </Files>
 </ProjectItem>

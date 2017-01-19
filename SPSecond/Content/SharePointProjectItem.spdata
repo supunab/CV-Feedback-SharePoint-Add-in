@@ -6,5 +6,6 @@
     <ProjectItemFile Source="uploadCV.css" Target="Content\" Type="ElementFile" />
     <ProjectItemFile Source="cvStatus.css" Target="Content\" Type="ElementFile" />
     <ProjectItemFile Source="AluminaiView.css" Target="Content\" Type="ElementFile" />
+    <ProjectItemFile Source="AdminView.css" Target="Content\" Type="ElementFile" />
   </Files>
 </ProjectItem>

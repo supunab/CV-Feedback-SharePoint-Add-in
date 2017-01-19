@@ -79,7 +79,7 @@ function checkAndDeleteFile() {
     };
 
     var camlQuery = new SP.CamlQuery();
-    camlQuery.set_viewXml("<Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query>");
+    camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query></View>");
     cvItems = cvList.getItems(camlQuery);
 
     clientContext.load(cvItems);
