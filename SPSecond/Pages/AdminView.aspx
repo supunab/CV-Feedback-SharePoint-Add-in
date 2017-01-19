@@ -14,8 +14,6 @@
     <link rel="Stylesheet" type="text/css" href="../Content/AdminView.css" />
 
     <script type="text/javascript" src="../Scripts/AdminView.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery-latest.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery.tablesorter.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
