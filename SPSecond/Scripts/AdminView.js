@@ -4,6 +4,7 @@ var dataArray = [];
 var batchArray = []; // Use custom hash function to map years to indeces; TODO -> use start year and map it to zero, then linear hashing
 
 $(document).ready(function () {
+    loadGUI();
     initDataArray();
     
     // load the table with values
@@ -71,12 +72,38 @@ $(document).ready(function () {
     , onError);
 });
 
+function loadGUI() {
+    // Load batch years according to the current year;
+    // Assume latest batch is current year and oldest is 2013
+
+    var current = new Date().getFullYear();
+    var innerHTML = "";
+
+    for (var i = 2013; i <= current; i++) {
+        innerHTML += "<option>" + i + "</option>";
+    }
+
+    $("#batchSelect").html(innerHTML);
+
+    // Initiate Data tables
+    $("#volunteerTable").DataTable();
+    $("#batchTable").DataTable();
+
+}
+
 function initDataArray() {
     // 2d array
     // 0 - Internship, 1-Career, 2-Masters
     // 2nd: 0 - Feedback Given; 1 = Not Given
     for (var i = 0 ; i < 3; i++) {
         dataArray.push([0, 0]);
+    }
+
+    // Initiate batchArray
+    // Assume start year 2013 (Index 0) and current year, last year
+    var current = new Date().getFullYear();
+    for (var i = 2013; i <= current; i++) {
+        batchArray.push([]);
     }
 }
 
@@ -161,4 +188,7 @@ function updateTableView() {
     $("#masters-p").html(String(
         (100 * dataArray[1][0] / (dataArray[1][1] + dataArray[1][0])).toFixed(2)
         ));
+
+    $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));
+    $("#feedbackCount").html(String(dataArray[0][0] + dataArray[1][0] + dataArray[2][0]));
 }
