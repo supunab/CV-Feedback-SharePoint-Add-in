@@ -2,11 +2,17 @@
 
 var dataArray = [];
 var batchArray = []; // Use custom hash function to map years to indeces; TODO -> use start year and map it to zero, then linear hashing
+var feedbackData = [];
+
+// Initiate Data tables
+var batchTable;
 
 $(document).ready(function () {
     loadGUI();
     initDataArray();
     
+    batchTable = $("#batchTable").DataTable();
+
     // load the table with values
     // Overview table
     var appWebUrl = decodeURIComponent(getQueryStringParameter("SPAppWebUrl"));
@@ -21,18 +27,20 @@ $(document).ready(function () {
     
     clientContext.load(
         cvItems,
-        'Include(Batch, CV_x0020_Type,Status)'
+        'Include(Batch, CV_x0020_Type,Status,Student_x0020_Name,Email)'
         );
 
     clientContext.executeQueryAsync(function () {
         var enumerator = cvItems.getEnumerator();
-        var current, batch, type, status;
+        var current, batch, type, status, name, email;
 
         while (enumerator.moveNext()) {
             current = enumerator.get_current();
             batch = current.get_item("Batch");
             type = current.get_item("CV_x0020_Type");
             status = current.get_item("Status");
+            name = current.get_item("Student_x0020_Name");
+            email = current.get_item("Email");
 
             switch (type + " " + status) {
                 case "Internship Feedback Given":
@@ -63,13 +71,41 @@ $(document).ready(function () {
                     alert("There is a problem in the switch statement!! : " + type + " " + status);
                     break;
             }
-
-            // TODO Update according to batch
+            batchArray[Number(batch) - 2013].push([name, email, type, status]);
         }
 
         updateTableView();
     }
     , onError);
+
+
+    // Get data from the FeedbackList
+    var feedbackList = clientContext.get_web().get_lists().getByTitle("FeedbackList");
+    var feedbackItems = feedbackList.getItems(new SP.CamlQuery());
+    clientContext.load(feedbackItems);
+
+    clientContext.executeQueryAsync(function () {
+        var enumerator = feedbackItems.getEnumerator();
+        var current, date;
+        while (enumerator.moveNext()) {
+            current = enumerator.get_current();
+
+            // Make date string
+            date = new Date(current.get_item("LastDate"));
+            date = date.toISOString().slice(0,10);
+            feedbackData.push([
+                "No Name!!",
+                current.get_item("Title"),
+                date,
+                current.get_item("Count")
+            ]);
+        }
+
+        updateVolunteerTable();
+    }
+        , onError);
+
+    $("#batchSelect").change(updateBatchTable);
 });
 
 function loadGUI() {
@@ -84,10 +120,6 @@ function loadGUI() {
     }
 
     $("#batchSelect").html(innerHTML);
-
-    // Initiate Data tables
-    $("#volunteerTable").DataTable();
-    $("#batchTable").DataTable();
 
 }
 
@@ -191,4 +223,20 @@ function updateTableView() {
 
     $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));
     $("#feedbackCount").html(String(dataArray[0][0] + dataArray[1][0] + dataArray[2][0]));
+
+    batchTable.rows.add(batchArray[0]).draw();
+}
+
+function updateVolunteerTable(){
+    $("#volunteerTable").DataTable({
+        data: feedbackData
+    });
+
+}
+
+function updateBatchTable() {
+    var year = Number($("#batchSelect :selected").text());
+    var data = batchArray[year - 2013];
+    batchTable.clear();
+    batchTable.rows.add(data).draw();
 }

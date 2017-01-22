@@ -115,43 +115,16 @@
                 <br />
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="volunteerTable" class="table table-responsive">
+                        <table id="volunteerTable" class="table table-responsive" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Last Date</th>
-                                    <th>Internship CVs Reviewed</th>
-                                    <th>Career CVs Reviewed</th>
-                                    <th>Masters CVs Reviewed</th>
-                                    <th>Total</th>
+                                    <th>CVs Reviewed</th>
                                 </tr>
                             </thead>
                             <tbody id="volunteer-table-body">
-                                <tr><td>Amarasinghe</td>
-                                    <td>sdfdsf@uomcse.lk</td>
-                                    <td>2015-01-02</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    </tr>
-                                <tr><td>Samanmali</td>
-                                    <td>samanmali@uomcse.lk</td>
-                                    <td>2016-01-02</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    </tr>
-                                <tr><td>Abraham</td>
-                                    <td>abraham@uomcse.lk</td>
-                                    <td>_</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    </tr>
                             </tbody>
                         </table>
                     </div>
@@ -180,6 +153,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>CV Type</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
