@@ -29,6 +29,11 @@ var item = [null, null, null, null];
 
 
 $(document).ready(function () {
+    // Hide all the cards first
+    $("#div1").hide();
+    $("#div2").hide();
+    $("#div3").hide();
+    $("#div4").hide();
 
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
@@ -46,10 +51,17 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
+
+        // Updating the feedback count and last date
+        updateView();
     });
 
-    // Check whether this works
+    // Getting the CVs
     checkUploadStatus();
+
+    // Load CVs accordingly when Select options are changed
+    $("#cvAim").change(doFilter);
+    $("#selectType").change(doFilter);
 
 });
 
@@ -61,6 +73,44 @@ function getQueryStringParameter(paramToRetrieve) {
         var singleParam = params[i].split("=");
         if (singleParam[0] == paramToRetrieve) return singleParam[1];
     }
+}
+
+// To obtain the number of feedbacks provided and the last date and show it
+function updateView() {
+    var feedbackList = clientContext.get_web().get_lists().getByTitle("FeedbackList");
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Title' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query></View>");
+
+    feedbackItems = feedbackList.getItems(camlQuery);
+
+    clientContext.load(feedbackItems);
+    
+    clientContext.executeQueryAsync(function () {
+        var enumerator = feedbackItems.getEnumerator();
+        // Could only have one item
+        if (enumerator.moveNext()) {
+            // Update count
+            $("#feedbackCount").html(String(enumerator.get_current().get_item("Count")));
+
+            var date = enumerator.get_current().get_item("LastDate");
+            date = new Date(date);
+            date = date.toISOString();
+
+            // Update date
+            $("#lastDate").html(date.slice(0, 10));
+            
+        } else {
+            // No records since no feedback given
+            $("#feedbackCount").html("0");
+            $("#lastDate").html("No feedback given");
+        }
+    }
+    , 
+    function (err) {
+        console.log(err);
+        alert("Error obtaining the feedback count, date from the add in web : "+ err.toString());
+    }
+    )
 }
 
 function checkUploadStatus() {
@@ -253,11 +303,11 @@ function showCV(list1, list2) {
 
 
 function setCVData(item, num) {
-
+    $("#div" + num).show();
     $('#divBatch' + num).text('Batch : ' + item.get_item('Batch'));
     $('#divName' + num).text(item.get_item('Student_x0020_Name'));
 
-    $('#divAim' + num).text('Aim : ' + item.get_item('CV_x0020_Type'));
+    $('#divAim' + num).text('Type : ' + item.get_item('CV_x0020_Type'));
     var filePath = item.get_item("FileRef");
     currentItem = item;
     var data = filePath.split("/");
@@ -269,6 +319,7 @@ function setCVData(item, num) {
     //$('#pdf' + num).html('<object type="application/pdf" width="30%" height="200px" data="' + urlTo + '" style="overflow:hidden; width: 100%; height: 390px;"></object>');
 }
 function setNotAvailable(num) {
+    $("#div" + num).hide();
     $('#divName' + num).text('Not Available');
     $('#divBatch' + num).text('Batch : _');
     $('#divAim' + num).text('Aim : _');
@@ -387,8 +438,8 @@ function doPreview(ele) {
         console.log(t);
         $('#modalBody').height(t);
         $('#infoDivName').text($('#divName' + idNum).text());
-        $('#infoDivBatch').text('Batch : ' + $('#divBatch' + idNum).text());
-        $('#infoDivAim').text('Aim : ' + $('#divName' + idNum).text());
+        $('#infoDivBatch').text($('#divBatch' + idNum).text());
+        $('#infoDivAim').text($('#divAim' + idNum).text());
         $('#number').text('' + idNum);
         $('#feedbackTxt').val('');
 
