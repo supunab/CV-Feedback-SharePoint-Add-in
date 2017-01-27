@@ -36,6 +36,8 @@ $(document).ready(function () {
         userGroups = user.get_groups();
         // User details loading completed
         userLoaded = true;
+
+        updateLastDate();
     });
 });
 
@@ -47,6 +49,30 @@ function getQueryStringParameter(paramToRetrieve) {
         if (singleParam[0] == paramToRetrieve) return singleParam[1];
     }
 }
+
+// Update last upload date on the view
+function updateLastDate() {
+    var hostClientContext = new SP.AppContextSite(clientContext, hostWebUrl);
+    cvList = hostClientContext.get_web().get_lists().getByTitle("CV List");
+
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Email' /><Value Type='Text'>" + userEmail + "</Value></Eq></Where></Query></View>");
+    cvItems = cvList.getItems(camlQuery);
+
+    clientContext.load(cvItems);
+    clientContext.executeQueryAsync(function () {
+        var enumerator = cvItems.getEnumerator();
+
+        // Can only exist one record per email
+        if (enumerator.moveNext()) {
+            var date = enumerator.get_current().get_item("Created");
+            date = new Date(date);
+            date = date.toISOString();
+            $("#lastUploadDate").val(date.slice(0,10)+" "+date.slice(11,19));
+        }
+    }
+    , onFailed);
+};
 
 
 function uploadFile() {

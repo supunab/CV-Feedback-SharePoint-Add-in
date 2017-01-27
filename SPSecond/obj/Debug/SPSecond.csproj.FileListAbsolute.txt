@@ -1,3 +1,6 @@
 F:\SharepointProjects\SPSecond\SPSecond\bin\Debug\SPSecond.pdb
 F:\SharepointProjects\SPSecond\SPSecond\obj\Debug\SPSecond.dll
 F:\SharepointProjects\SPSecond\SPSecond\obj\Debug\SPSecond.pdb
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\bin\Debug\SPSecond.pdb
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\obj\Debug\SPSecond.dll
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\obj\Debug\SPSecond.pdb

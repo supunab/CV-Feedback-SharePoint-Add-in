@@ -51,7 +51,7 @@
 
         <div class="row" style="margin-top:5%">
             <div class="col-md-2 col-md-offset-5">
-                <a id="homeBtn" class="btn btn-primary btn-block" onclick="gotoHome()" href="">Goto Home</a>
+                <a id="homeBtn" class="btn btn-primary btn-block" onclick="gotoHome()" href="">Home</a>
             </div>
 
         </div>

@@ -23,6 +23,11 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <%-- For Datatables --%>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 </asp:Content>
 
 <%-- The markup in the following Content element will be placed in the TitleArea of the page --%>
@@ -50,8 +55,8 @@
         <div class="tab-content">
             <div id="Overview" class="tab-pane active">
                 <div class="row">
-                    <div class="col-md-3 col-md-offset-3"><h3>CV Count : </h3><h3 id="cvCount"></h3></div>
-                    <div class="col-md-3"><h3>Completed Count : </h3><h3 id="feedbackCount"></h3></div>
+                    <div class="col-md-3 col-md-offset-3"><h3>CV Count : &nbsp<span id="cvCount"></span></h3></div>
+                    <div class="col-md-3"><h3>Completed Count : &nbsp<span id="feedbackCount"></span></h3></div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
@@ -108,70 +113,47 @@
 
             <div id="Volunteer" class="tab-pane">
                 <br />
-                <div style="text-align:right">
-                    <input class="btn btn-info" type="button" value="Sort by Oldest Date" />
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="volunteerTable" class="table table-responsive" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Last Date</th>
+                                    <th>CVs Reviewed</th>
+                                </tr>
+                            </thead>
+                            <tbody id="volunteer-table-body">
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-              <table id="volunte" class="tablesorter table table-hover table-responsive" style="font-size:large;">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Last Date</th>
-                                        <th>Internship CVs Reviewed</th>
-                                        <th>Career CVs Reviewed</th>
-                                        <th>Masters CVs Reviewed</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="volunteer-table-body">
-                                    <tr><td>Amarasinghe</td>
-                                        <td>sdfdsf@uomcse.lk</td>
-                                        <td>2015-01-02</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                        <td>3</td>
-                                     </tr>
-                                    <tr><td>Samanmali</td>
-                                        <td>samanmali@uomcse.lk</td>
-                                        <td>2016-01-02</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>1</td>
-                                        <td>4</td>
-                                     </tr>
-                                    <tr><td>Abraham</td>
-                                        <td>abraham@uomcse.lk</td>
-                                        <td>_</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                     </tr>
-                                </tbody>
-                            </table>
+              
 
 
             </div>
 
             <div id="Batch" class="tab-pane">
                <br />
-               <div class="row" style="font-size:large;">
-                   &nbsp &nbsp Select Batch : &nbsp
-                   <select style="width:100px">
-                       <option value="13">2013</option>
-                        <option value="14">2014</option>
-                        <option value="15">2015</option>
-                        <option value="16">2016</option>
-                   </select>
-               </div>
-              <table id="batch" class="table table-hover table-responsive" style="font-size:large;">
+                <div class="row form-group form-inline">
+                    <div class="col-md-3">
+                        <label class="col-form-label" for="batchSelect">Select Batch&nbsp&nbsp</label>
+                        <select id="batchSelect" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr />
+                    </div>
+                </div>
+              <table id="batchTable" class="table table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>CV Type</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
