@@ -21,6 +21,8 @@
     <ElementFile Location="Scripts\DefaultScript.js" />
     <ElementFile Location="Scripts\AluminaiView.js" />
     <ElementFile Location="Scripts\AdminView.js" />
+    <ElementFile Location="Scripts\linkify-jquery.min.js" />
+    <ElementFile Location="Scripts\linkify.min.js" />
     <ElementManifest Location="Content\Elements.xml" />
     <ElementFile Location="Content\App.css" />
     <ElementFile Location="Content\uploadCV.css" />

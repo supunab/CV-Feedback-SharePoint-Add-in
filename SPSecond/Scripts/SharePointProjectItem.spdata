@@ -13,5 +13,7 @@
     <ProjectItemFile Source="DefaultScript.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="AluminaiView.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="AdminView.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="linkify-jquery.min.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="linkify.min.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

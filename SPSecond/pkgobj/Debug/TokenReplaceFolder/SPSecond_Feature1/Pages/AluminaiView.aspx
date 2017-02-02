@@ -13,19 +13,41 @@
 
     <!-- Add your CSS styles to the following file -->
     <link rel="Stylesheet" type="text/css" href="../Content/AluminaiView.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
     <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="../Scripts/AluminaiView.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">
-    <div class="jumnotron text-center padding-bottom">
+    <div class="jumnotron text-center">
         <h1>Provide Feedback</h1>
     </div>
 
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
+                <h3>Feedback Count <span class="label label-default" id="feedbackCount">0</span></h3>
+                <br />
+            </div>
+            <div class="col-md-4">
+                <h3>Last Date <span class="label label-info" id="lastDate">No CVs Reviewed</span></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <hr />
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-1 col-md-offset-2">
                 <h5>CV Type</h5>
@@ -49,8 +71,14 @@
             </div>
         </div>
         
+        <div class="row" id="emptyMessage">
+            <div class="col-md-8 col-md-offset-2">
+                <br />
+                <h4 class="text-danger text-center">No CVs found to review</h4>
+            </div>
+        </div>
         <div id="divMain" class="row" style="margin-top: 30px">
-            <div class="col-md-3">
+            <div class="col-md-3" id="div1">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div style="text-align: center;"><h4 id="divName1">Not Available</h4></div>
@@ -72,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" id="div2">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div style="text-align: center;"><h4 id="divName2">Not Available</h4></div>
@@ -94,7 +122,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" id="div3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div style="text-align: center;"><h4 id="divName3">Not Available</h4></div>
@@ -116,7 +144,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" id="div4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div style="text-align: center;"><h4 id="divName4">Not Available</h4></div>

@@ -94,7 +94,7 @@ $(document).ready(function () {
             date = new Date(current.get_item("LastDate"));
             date = date.toISOString().slice(0,10);
             feedbackData.push([
-                "No Name!!",
+                current.get_item("Name1"),
                 current.get_item("Title"),
                 date,
                 current.get_item("Count")

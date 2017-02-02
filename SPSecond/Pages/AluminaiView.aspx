@@ -18,6 +18,8 @@
     <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="../Scripts/AluminaiView.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">
@@ -34,11 +36,11 @@
 
         <div class="row">
             <div class="col-md-3 col-md-offset-3">
-                <h3>Feedback Count <span class="label label-default" id="feedbackCount">...</span></h3>
+                <h3>Feedback Count <span class="label label-default" id="feedbackCount">0</span></h3>
                 <br />
             </div>
-            <div class="col-md-3">
-                <h3>Last Date <span class="label label-info" id="lastDate">............</span></h3>
+            <div class="col-md-4">
+                <h3>Last Date <span class="label label-info" id="lastDate">No CVs Reviewed</span></h3>
             </div>
         </div>
         <div class="row">
@@ -69,6 +71,12 @@
             </div>
         </div>
         
+        <div class="row" id="emptyMessage">
+            <div class="col-md-8 col-md-offset-2">
+                <br />
+                <h4 class="text-danger text-center">No CVs found to review</h4>
+            </div>
+        </div>
         <div id="divMain" class="row" style="margin-top: 30px">
             <div class="col-md-3" id="div1">
                 <div class="panel panel-primary">
@@ -167,25 +175,39 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;Close</button>
                     <h3 class="modal-title" id="myModalLabel">Feedback Form</h3>
                 </div>
-                <div class="modal-body row" id="modalBody">
-                    <div id="pdfModal" class="col-md-8">
-                    </div>
-                    <div id="feedBackForm" class="col-md-4">
-                        <div id="infoDiv">
-                            <div id="infoDivName" style="font-size: 15pt; font-weight: 500;">&nbsp</div>
-                            <div id="infoDivBatch"></div>
-                            <div id="infoDivAim"></div>
-                            <div id="number" style="display:none"></div>
-                        </div>
-                        <br />
-                        <span style="font-weight: 300;">Enter Feedback : </span>
-                        <div id="feedbackDiv" style="height: 60%;">
-                            <textarea id="feedbackTxt" rows="15" style="height: 100%; width: 100%">
+                <div class="modal-body" id="modalBody">
+                    <div class="containter">
+                        <div class="row">
+                            <div id="pdfModal" class="col-md-8"></div>
+                            <div id="feedBackForm" class="col-md-4">
+                                <div class="row">
+                                    <h4 id="infoDivName">&nbsp</h4>
+                                </div>
+                                <div class="row">
+                                    <p id="infoDivBatch"></p>
+                                </div>
+                                <div class="row">
+                                    <p id="infoDivAim"></p>
+                                </div>
+                                <div class="row">
+                                    <div id="number" style="display:none"></div>
+                                </div>
+                                <div class="row">
+                                    <h4><b>Enter Feedback : </b></h4>
+                                </div>
+                                
+                                <div class="row">
+                                    <textarea id="feedbackTxt" rows="18" style="width:95%; height:100%;"></textarea>
+                                </div>
 
-                                </textarea>
-                        </div>
-                        <div style="text-align: right; padding-top: 10px;">
-                            <input type="button" runat="server" value="Save Feedback" onclick="return validateFeedback()" class="btn btn-info" />
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-7">
+                                        <input type="button" runat="server" value="Save Feedback" onclick="return validateFeedback()" class="btn btn-info" />
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -193,4 +215,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal pop up -->
+    <div id="popupModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="popupTitle">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+            <p id="popupBody">Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+    <!-- Modal to show while proccessing -->
+    <div id="loadingModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="loadingTitle">Feedback Submiting..</h4>
+        </div>
+        <div class="modal-body">
+            <img style="text-align:center" src="../images/loading.gif" alt="Loading.. Please wait whicle the operation completes." />
+        </div>
+    </div>
+  </div>
+</div>
 </asp:Content>

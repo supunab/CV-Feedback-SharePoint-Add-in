@@ -26,10 +26,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-md-offset-3">
-                <a id="pageLink" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Go to upload CV page</a>
+                <a id="pageLink" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload CV</a>
             </div>
             <div class="col-md-3">
-                <a id="pageLink2" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Go to Check status</a>
+                <a id="pageLink2" class="btn btn-default btn-block" href=""><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Check Status</a>
             </div>
         </div>
         

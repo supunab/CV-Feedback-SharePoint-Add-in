@@ -4,12 +4,12 @@
     <ContentTypes>
       
       
-    <ContentType ID="0x010028453b3841404b238aa3114b83ed9519" Name="ListFieldsContentType"><FieldRefs><FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" /><FieldRef ID="{b454c29c-ad91-4803-934c-7f79f6e815f7}" Name="Count" /><FieldRef ID="{7b2de9f6-4515-425d-bf10-4abd0cc49fd7}" Name="LastDate" /></FieldRefs></ContentType><ContentTypeRef ID="0x01">
+    <ContentType ID="0x010028453b3841404b238aa3114b83ed9519" Name="ListFieldsContentType"><FieldRefs><FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" /><FieldRef ID="{b454c29c-ad91-4803-934c-7f79f6e815f7}" Name="Count" /><FieldRef ID="{7b2de9f6-4515-425d-bf10-4abd0cc49fd7}" Name="LastDate" /><FieldRef ID="{b2423378-6746-4d90-99fe-9e2f8ae96435}" Name="Name1" /></FieldRefs></ContentType><ContentTypeRef ID="0x01">
         <Folder TargetName="Item" />
       </ContentTypeRef><ContentTypeRef ID="0x0120" /></ContentTypes>
     <Fields>
       
-    <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="Email" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" /><Field Name="Count" ID="{b454c29c-ad91-4803-934c-7f79f6e815f7}" DisplayName="Count" Type="Number" Required="TRUE" /><Field Name="LastDate" ID="{7b2de9f6-4515-425d-bf10-4abd0cc49fd7}" DisplayName="LastDate" Type="DateTime" Required="TRUE" /></Fields>
+    <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="Email" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" /><Field Name="Count" ID="{b454c29c-ad91-4803-934c-7f79f6e815f7}" DisplayName="Count" Type="Number" Required="TRUE" /><Field Name="LastDate" ID="{7b2de9f6-4515-425d-bf10-4abd0cc49fd7}" DisplayName="LastDate" Type="DateTime" Required="TRUE" /><Field Name="Name1" ID="{b2423378-6746-4d90-99fe-9e2f8ae96435}" DisplayName="Name" Type="Text" Required="TRUE" /></Fields>
     <Views>
       
       
@@ -37,7 +37,7 @@
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
           
-        <FieldRef Name="LinkTitle"></FieldRef><FieldRef Name="Count" /><FieldRef Name="LastDate" /></ViewFields>
+        <FieldRef Name="LinkTitle"></FieldRef><FieldRef Name="Count" /><FieldRef Name="LastDate" /><FieldRef Name="Name1" /></ViewFields>
         <Query>
           <OrderBy>
             

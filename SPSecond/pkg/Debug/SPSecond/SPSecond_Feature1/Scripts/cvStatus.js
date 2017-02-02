@@ -85,6 +85,12 @@ function updateFeedbackGivenUI(feedback) {
     $("#reviewed").show();
     $("#feedbackbody").html(feedback);
 
+    // linkify
+    $("#feedbackbody").linkify({
+        target: "_blank"
+    }
+    );
+
 }
 
 function updateNotReviewedUI() {

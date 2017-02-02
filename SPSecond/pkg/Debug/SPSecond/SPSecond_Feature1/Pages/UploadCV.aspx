@@ -30,6 +30,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-md-offset-3">
+                <p>Last Upload Date</p>
+            </div>
+            <div class="col-md-3">
+                <input id="lastUploadDate" class="form-control" type="text" value="Not Available" disabled/><br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Upload your CV here</p>
             </div>
             <div class="col-md-3">
@@ -87,7 +96,7 @@
                 <button id="btnSubmit" type="button" class="btn btn-primary">Submit</button>
             </div>
             <div class="col-md-2">
-                <a id="homeBtn" type="button" class="btn btn-danger">Goto Home</a>
+                <a id="homeBtn" type="button" class="btn btn-danger">&nbsp&nbsp Back&nbsp&nbsp&nbsp</a>
             </div>
         </div>
 

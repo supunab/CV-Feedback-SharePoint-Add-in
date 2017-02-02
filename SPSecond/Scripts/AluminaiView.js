@@ -6,6 +6,7 @@ var user;
 // Current userinfo
 var userEmail;
 var userGroups;
+var name;
 
 // For SharePoint REST calls
 var appWebUrl;
@@ -34,6 +35,7 @@ $(document).ready(function () {
     $("#div2").hide();
     $("#div3").hide();
     $("#div4").hide();
+    $("#emptyMessage").hide();
 
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
@@ -51,6 +53,30 @@ $(document).ready(function () {
     clientContext.executeQueryAsync(function () {
         userEmail = user.get_email();
         userGroups = user.get_groups();
+        
+        // Getting user's name
+        var userInfoList = clientContext.get_web().get_siteUserInfoList();
+        var query = new SP.CamlQuery();
+        query.set_viewXml("<View><Query><Where><Eq><FieldRef Name='Name' /><Value Type='Text'>" + user.get_loginName() + "</Value></Eq></Where></Query><RowLimit>1</RowLimit></View>");
+
+        var items = userInfoList.getItems(query);
+        clientContext.load(items, "Include(FirstName,ID,LastName,Name)");
+
+        clientContext.executeQueryAsync(function () {
+            var enumerator = items.getEnumerator();
+
+            // Only one item
+            enumerator.moveNext();
+
+            name = enumerator.get_current().get_item("FirstName") + " " + enumerator.get_current().get_item("LastName");
+
+        },
+        function () {
+            alert("error loading user data!");
+        }
+        )
+
+
 
         // Updating the feedback count and last date
         updateView();
@@ -102,7 +128,7 @@ function updateView() {
         } else {
             // No records since no feedback given
             $("#feedbackCount").html("0");
-            $("#lastDate").html("No feedback given");
+            $("#lastDate").html("No CVs Reviewed");
         }
     }
     , 
@@ -151,12 +177,14 @@ function onFailed(sender, args) {
 
 function saveFeedBack(num, feedBack) {
     if (feedBack != "" || feedBack != none) {
+        // Increment the count
+        $("#feedbackCount").html(String(Number($("#feedbackCount").html()) + 1));
 
         setNotAvailable(num);
         $('#myModal').modal('hide');
         var index = $('#selectType').prop('selectedIndex');
 
-
+        
         //Filterig lists to remove feedback given from all occurences
         saveFeddBackInDatabase(feedBack, this.item[num - 1]);
         original = original.filter(function (el) {
@@ -299,6 +327,7 @@ function showCV(list1, list2) {
     for (var i = last + 1; i < 4; i++) {
         setNotAvailable(i);
     }
+    updateEmptyMessage();
 }
 
 
@@ -364,11 +393,14 @@ function doFilter(btnClicked) {
         showCVSet();
     }
 }
-//Complete this.
+
+// Saving the feedback
 function saveFeddBackInDatabase(feedBack, item) {
     // Update feedback to the host web list
     item.set_item("Feedback_x0020_Given", feedBack);
     item.set_item("Status", "Feedback Given");
+    console.log(item.get_item("Email"));
+    var toEmail = item.get_item("Email");
     item.update();
 
     clientContext.executeQueryAsync(function () {
@@ -397,33 +429,54 @@ function saveFeddBackInDatabase(feedBack, item) {
             listItem.set_item("Count", count + 1);
             listItem.update();
             clientContext.executeQueryAsync(function () {
-                //success
+                sendEmailConfirmation(toEmail);
+                $("#loadingModal").modal("hide");
+                $("#popupTitle").html("Feedback Upload Success");
+                $("#popupBody").html("Feedback uploaded successfully. Thank you.");
+                $("#popupModal").modal();
             },
             function () {
-                // Failed
+                sendEmailConfirmation(toEmail);
+                $("#loadingModal").modal("hide");
+                $("#popupTitle").html("Feedback Upload Failed");
+                $("#popupBody").html("Unfortunately there were some issues when uploading the CV");
+                $("#popupModal").modal();
             });
 
         } else {
             // email not existing in the list , create the record
+            // Internal name of the Name field is Name1
+            // Internal name of the Email field is Title
+            // If in doubt, check using SPCamlQuery Helper App
             var itemCreateInfo = new SP.ListItemCreationInformation();
             var listItem = feedbackList.addItem(itemCreateInfo);
             listItem.set_item("Title", userEmail);
             listItem.set_item("Count", 1);
             listItem.set_item("LastDate", new Date());
+            listItem.set_item("Name1", name);
             listItem.update();
 
             clientContext.load(listItem);
             clientContext.executeQueryAsync(function () {
-                //alert("Success id : " + listItem.get_id());
+                sendEmailConfirmation(toEmail);
+                $("#loadingModal").modal("hide");
+                $("#popupTitle").html("Feedback Upload Success");
+                $("#popupBody").html("Feedback uploaded successfully. Thank you.");
+                $("#popupModal").modal();
             },
             function () {
-                //alert("List update failed");
+                sendEmailConfirmation(toEmail);
+                $("#loadingModal").modal("hide");
+                $("#popupTitle").html("Feedback Upload Failed");
+                $("#popupBody").html("Unfortunately there were some issues when uploading the CV");
+                $("#popupModal").modal();
             }
             )
 
         };
     },
     function () {
+        $("#loadingModal").modal("hide");
         alert("Error Occured");
     });
 }
@@ -435,7 +488,6 @@ function doPreview(ele) {
 
     if (pdf[idNum - 1] !== '') {
         var t = $('#myModal').height() * 0.88;
-        console.log(t);
         $('#modalBody').height(t);
         $('#infoDivName').text($('#divName' + idNum).text());
         $('#infoDivBatch').text($('#divBatch' + idNum).text());
@@ -446,7 +498,10 @@ function doPreview(ele) {
         $('#pdfModal').html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: ' + t + ';background-position:center;"><object type="application/pdf" width="100%" height="400px"  data="' + pdf[idNum - 1] + '?#scrollbar=0&navpanes=0" style="overflow:hidden; width: 100%; height:' + t + 'px;"></object>');
 
         $('#feedbackTxt').focus();
-        $('#myModal').modal('show');
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
     } else {
         $('#myModal').modal('hide');
     }
@@ -454,11 +509,66 @@ function doPreview(ele) {
 function validateFeedback() {
     var feedback = $('#feedbackTxt').val().trim();
     var num = $('#number').text().trim();
-    console.log('Text area :' + feedback + "  " + num)
+
     if (~isNaN(feedback) && feedback !== '') {
+        $("#loadingModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+
         saveFeedBack(num, feedback);
     } else {
         alert("You must enter valid feedback to save !!");
     }
 
+}
+
+function updateEmptyMessage() {
+    for (var i = 1; i < 5; i++) {
+        if ($("#div" + i).is(":visible")) {
+            $("#emptyMessage").hide();
+            return
+        }
+    }
+
+    $("#emptyMessage").show();
+}
+
+function sendEmailConfirmation(to) {
+    // Send email
+    
+    var body = "Dear " + to.split('.')[0].substr(0, 1).toUpperCase() + to.split('.')[0].substr(1) + ",\nYour CV review completed. Please go and check CV Status on the App. \r\n\r\nBest Regards,CV Feedback APP TEAM";
+    var subject = "CV Feedback";
+
+    //Get the relative url of the site
+    var siteurl = _spPageContextInfo.webServerRelativeUrl;
+    var urlTemplate = siteurl + "/_api/SP.Utilities.Utility.SendEmail";
+    $.ajax({
+        contentType: 'application/json',
+        url: urlTemplate,
+        type: "POST",
+        data: JSON.stringify({
+            'properties': {
+                '__metadata': {
+                    'type': 'SP.Utilities.EmailProperties'
+                },
+                'To': {
+                    'results': [to]
+                },
+                'Body': body,
+                'Subject': subject
+            }
+        }),
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            "content-type": "application/json;odata=verbose",
+            "X-RequestDigest": jQuery("#__REQUESTDIGEST").val()
+        },
+        success: function (data) {
+            // Success
+        },
+        error: function (err) {
+            alert('Error in sending Email: ' + JSON.stringify(err));
+        }
+    });
 }

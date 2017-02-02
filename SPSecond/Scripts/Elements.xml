@@ -12,5 +12,7 @@
     <File Path="Scripts\DefaultScript.js" Url="Scripts/DefaultScript.js" ReplaceContent="TRUE" />
     <File Path="Scripts\AluminaiView.js" Url="Scripts/AluminaiView.js" ReplaceContent="TRUE" />
     <File Path="Scripts\AdminView.js" Url="Scripts/AdminView.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\linkify-jquery.min.js" Url="Scripts/linkify-jquery.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\linkify.min.js" Url="Scripts/linkify.min.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

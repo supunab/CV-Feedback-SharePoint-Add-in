@@ -15,6 +15,8 @@
 
     <!--JS-->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Scripts/linkify.min.js"></script>
+    <script type="text/javascript" src="../Scripts/linkify-jquery.min.js"></script>
     <script type="text/javascript" src="../Scripts/cvStatus.js"></script>
 </asp:Content>
 
@@ -43,7 +45,7 @@
                     <h3 class="panel-title">Received Feedback</h3>
                   </div>
                   <div class="panel-body">
-                    <p id="feedbackbody">This will show the feedback.</p>
+                    <p style="white-space :pre-wrap" id="feedbackbody">This will show the feedback.</p>
                   </div>
                 </div>
             </div>
