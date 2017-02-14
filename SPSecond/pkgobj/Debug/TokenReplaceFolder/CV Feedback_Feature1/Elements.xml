@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="RootModule">
+    <File Path="job-search-symbol-of-a-hand-holding-cv.ico" Url="job-search-symbol-of-a-hand-holding-cv.ico" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

@@ -223,8 +223,7 @@ function updateTableView() {
 
     $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));
     $("#feedbackCount").html(String(dataArray[0][0] + dataArray[1][0] + dataArray[2][0]));
-    var value = ((dataArray[0][0] + dataArray[1][0] + dataArray[2][0]) / (dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0])).toFixed(2);
-    createProgressBar(value);
+
     batchTable.rows.add(batchArray[0]).draw();
 }
 
@@ -240,33 +239,4 @@ function updateBatchTable() {
     var data = batchArray[year - 2013];
     batchTable.clear();
     batchTable.rows.add(data).draw();
-}
-
-function createProgressBar(value) {
-    var bar = new ProgressBar.Circle(progress, {
-        color: '#000000',
-        // This has to be the same size as the maximum width to
-        // prevent clipping
-        strokeWidth: 18,
-        trailWidth: 18,
-        easing: 'easeInOut',
-        duration: 1400,
-        text: {
-            autoStyleContainer: false
-        },
-        from: { color: '#a5110e', width: 14 },
-        to: { color: '#9dff7a', width: 14 },
-        // Set default step function for all animate calls
-        step: function (state, circle) {
-            circle.path.setAttribute('stroke', state.color);
-            circle.path.setAttribute('stroke-width', state.width);
-            var value = Math.round(circle.value() * 100);
-            circle.setText(value + "%");
-
-        }
-    });
-    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    bar.text.style.fontSize = '2rem';
-
-    bar.animate(value);
 }

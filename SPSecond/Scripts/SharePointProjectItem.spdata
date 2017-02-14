@@ -15,5 +15,6 @@
     <ProjectItemFile Source="AdminView.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="linkify-jquery.min.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="linkify.min.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="progressbar.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

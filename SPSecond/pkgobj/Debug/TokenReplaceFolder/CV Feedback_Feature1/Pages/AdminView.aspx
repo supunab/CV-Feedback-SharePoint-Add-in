@@ -57,16 +57,22 @@
         <div class="tab-content">
             <div id="Overview" class="tab-pane active">
                 <div class="row">
-                    <hr />
-                    <div class="col-md-2">
-                        <div id="progress" style="margin-top:3%;margin-bottom:1.5%;"></div>
-                    </div>
-                    <div class="col-md-3">
-                        <h4 style="margin-top:20%;">CV Count : &nbsp<span id="cvCount"></span></h4>
-                        <h4>Completed Count : &nbsp<span id="feedbackCount"></span></h4>
+                    <div class="col-md-3 col-md-offset-3"><h3>CV Count : &nbsp<span id="cvCount"></span></h3></div>
+                    <div class="col-md-3"><h3>Completed Count : &nbsp<span id="feedbackCount"></span></h3></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 35%">
+                                Feedback Given
+                            </div>
+                            <div class="progress-bar progress-bar-danger" style="width: 65%">
+                                Not Reviewed
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr />
+
                 <div class="row">
                     <div class="col-md-12">
                             <table class="table table-hover table-responsive">
