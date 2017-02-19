@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://schemas.microsoft.com/sharepoint/" Id="c8fbdec9-6835-4e0a-9a51-e2d1e82de647" Scope="Web" Title="CV Feedback Feature2" Version="1.0.0.2">
+  <ElementManifests>
+    <ElementManifest Location="AppConstants\Elements.xml" />
+    <ElementFile Location="AppConstants\Schema.xml" />
+    <ElementManifest Location="AppConstantsInstance\Elements.xml" />
+  </ElementManifests>
+  <UpgradeActions>
+    <VersionRange>
+      <ApplyElementManifests>
+        <ElementManifest Location="AppConstants\Elements.xml" />
+        <ElementManifest Location="AppConstantsInstance\Elements.xml" />
+      </ApplyElementManifests>
+    </VersionRange>
+  </UpgradeActions>
+</Feature>

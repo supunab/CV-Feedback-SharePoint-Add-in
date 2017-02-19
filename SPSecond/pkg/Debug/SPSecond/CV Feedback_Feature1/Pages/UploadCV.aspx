@@ -124,4 +124,24 @@
         </div>
     </div>
 
+    <!-- Modal for showing maximum upload limit-->
+    <div class="modal fade" id="uploadLimitModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Feedback Upload Limit Exceeded</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>You have uploaded your CV and got feedback. You cannot upload further.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="loadHome()">Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>

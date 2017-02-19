@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="AppConstants" OnQuickLaunch="FALSE" TemplateType="100" Url="Lists/AppConstants" Description="To store contanst relating to CV Feedback app. Includes max upload count per user."></ListInstance>
+</Elements>

@@ -39,6 +39,15 @@
 
         <div class="row">
             <div class="col-md-3 col-md-offset-3">
+                <p>Uploads Remaining&nbsp<a href="#" data-toggle="tooltip" title="This value shows the number of times you can re-submit and recieve feedbacks. But if you re-submit before getting a feedback, your previous CV will be replaced." aria-hidden="true"><span style="color:#337ab7;" class="glyphicon glyphicon-question-sign"></span></a></p>
+            </div>
+            <div class="col-md-3">
+                <input id="uploadsRemaining" class="form-control" type="text" value="Not Available" disabled/><br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3">
                 <p>Upload your CV here</p>
             </div>
             <div class="col-md-3">
@@ -119,6 +128,25 @@
 
                 <div class="modal-footer">
                     <button id="modalBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for showing maximum upload limit-->
+    <div class="modal fade" id="uploadLimitModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Feedback Upload Limit Exceeded</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>You have uploaded your CV and got feedback. You cannot upload further.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick="loadHome()">Home</button>
                 </div>
             </div>
         </div>

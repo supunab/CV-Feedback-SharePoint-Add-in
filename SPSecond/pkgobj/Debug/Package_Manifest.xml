@@ -2,5 +2,6 @@
 <Solution xmlns="http://schemas.microsoft.com/sharepoint/" SolutionId="349a9eb9-a77c-4cbb-b33c-e8f3c824e0a6" SharePointProductVersion="16.0">
   <FeatureManifests>
     <FeatureManifest Location="CV Feedback_Feature1\Feature.xml" />
+    <FeatureManifest Location="CV Feedback_Feature2\Feature.xml" />
   </FeatureManifests>
 </Solution>

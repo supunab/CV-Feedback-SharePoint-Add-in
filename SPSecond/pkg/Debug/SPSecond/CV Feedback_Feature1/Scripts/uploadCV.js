@@ -14,6 +14,13 @@ var hostWebUrl;
 // Wait till user details are loaded before uploading. (Due to async execution)
 var userLoaded = false;
 
+// User's update count and current feedback status
+var count = 0;
+var feedbackStatus = "";
+
+// Maximum limit of uploads. Default is 3.
+var feedbackLimit = 3;
+
 $(document).ready(function () {
     // Check for FileReader API for Reading files
     if (!window.FileReader) {
@@ -36,10 +43,13 @@ $(document).ready(function () {
         userGroups = user.get_groups();
         // User details loading completed
         userLoaded = true;
-
         updateLastDate();
     });
 });
+
+function loadHome() {
+    window.location.replace(decodeURIComponent(getQueryStringParameter("SPAppWebUrl")));
+}
 
 // Get parameters from the query string.
 function getQueryStringParameter(paramToRetrieve) {
@@ -66,13 +76,46 @@ function updateLastDate() {
         // Can only exist one record per email
         if (enumerator.moveNext()) {
             var date = enumerator.get_current().get_item("Created");
+            count = parseInt(enumerator.get_current().get_item("Count"));
+            feedbackStatus = enumerator.get_current().get_item("Status");
+
             date = new Date(date);
             date = date.toISOString();
-            $("#lastUploadDate").val(date.slice(0,10)+" "+date.slice(11,19));
+            $("#lastUploadDate").val(date.slice(0, 10) + " " + date.slice(11, 19));
         }
+
+        // Get max upload count
+        var appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
+        conItems = appConstants.getItems(new SP.CamlQuery());
+
+        clientContext.executeQueryAsync(function () {
+            var enumerator = conItems.getEnumerator();
+
+            while (enumerator.moveNext()) {
+                if (enumerator.get_current().get_item("Title") === "UploadLimit") {
+                    feedbackLimit = parseInt(enumerator.get_current().get_item("Count"));
+                    break;
+                }
+            }
+
+            limitPassed();
+        },
+        onFailed);
     }
     , onFailed);
 };
+
+function limitPassed() {
+    // Check upload count
+    if (feedbackStatus === "Feedback Given") {
+        if (count >= feedbackLimit) {
+            $("#uploadLimitModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+    }
+}
 
 
 function uploadFile() {
@@ -91,7 +134,7 @@ function onError(error) {
 function onFailed(sender, args) {
     //alert(args.get_message());
     $("#modalTitle").html("Error");
-    $("#modalText").html(args.get_message());
+    $("#modalText").html("An Error Occured. This might be due to a error in your internet connection.");
     $("#alertModal").modal();
 }
 
@@ -243,8 +286,12 @@ function uploadFileSuccess() {
         // The example gets the list item type from the item's metadata, but you can also get it from the
         // ListItemEntityTypeFullName property of the list.
 
-        var body = String.format("{{'__metadata':{{'type':'{0}'}},'FileLeafRef':'{1}','Title':'{2}','Email':'{3}','CV_x0020_Type':'{4}','Batch':'{5}','Student_x0020_Name':'{6}'}}",
-            itemMetadata.type, newName, newName, userEmail, $("#cvType").find(":selected").text(), $("#batch").find(":selected").text(), $("#studentName").val());
+        if (feedbackStatus == "Feedback Given") {
+            count++;
+        }
+
+        var body = String.format("{{'__metadata':{{'type':'{0}'}},'FileLeafRef':'{1}','Title':'{2}','Email':'{3}','CV_x0020_Type':'{4}','Batch':'{5}','Student_x0020_Name':'{6}','Count':'{7}'}}",
+            itemMetadata.type, newName, newName, userEmail, $("#cvType").find(":selected").text(), $("#batch").find(":selected").text(), $("#studentName").val(), count);
 
         // Send the request and return the promise.
         // This call does not return response content from the server.

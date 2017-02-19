@@ -46,6 +46,15 @@
     <ApplicationIcon>job-search-symbol-of-a-hand-holding-cv.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="AppConstants\AppConstantsInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9556057f-b721-4605-a7f9-cb485763b7f6}</SharePointProjectItemId>
+    </None>
+    <None Include="AppConstants\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e5cdb5d2-a132-47b4-b7a7-730a305b23e4}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\Feature2\Feature2.feature">
+      <FeatureId>{e0dd8ba9-02d5-4fd9-8758-07531d18b9be}</FeatureId>
+    </None>
     <None Include="FeedbackList\FeedbackListInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9c64ff2e-3026-4b88-968d-1be06e4a36b2}</SharePointProjectItemId>
     </None>
@@ -56,11 +65,17 @@
     <None Include="Pages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7d6d69cf-5b66-4cbf-a429-054037e628f8}</SharePointProjectItemId>
     </None>
+    <Content Include="AppConstants\AppConstantsInstance\Elements.xml" />
+    <Content Include="AppConstants\Elements.xml" />
+    <Content Include="AppConstants\Schema.xml" />
     <Content Include="Content\AdminView.css" />
     <Content Include="Content\AluminaiView.css" />
     <Content Include="Content\cvStatus.css" />
     <Content Include="Content\uploadCV.css" />
     <Content Include="Elements.xml" />
+    <Content Include="Features\Feature2\Feature2.Template.xml">
+      <DependentUpon>Feature2.feature</DependentUpon>
+    </Content>
     <Content Include="FeedbackList\Elements.xml" />
     <Content Include="FeedbackList\FeedbackListInstance\Elements.xml" />
     <Content Include="FeedbackList\Schema.xml" />
