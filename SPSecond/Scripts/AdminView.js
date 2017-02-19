@@ -106,6 +106,58 @@ $(document).ready(function () {
         , onError);
 
     $("#batchSelect").change(updateBatchTable);
+
+    // Settings page
+    var appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
+    var conItems = appConstants.getItems(new SP.CamlQuery());
+    clientContext.load(conItems);
+
+    clientContext.executeQueryAsync(function () {
+        var enumerator = conItems.getEnumerator();
+
+        while (enumerator.moveNext()) {
+            if (enumerator.get_current().get_item("Title") === "UploadLimit") {
+                // this is  the maximum upload count
+                $("#uploadLimit").val(enumerator.get_current().get_item("Count"));
+            }
+        }
+    },
+        onError);
+
+    $("#settingsConfirm").click(function () {
+        $("#settingsModal").modal("hide");
+        appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
+        conItems = appConstants.getItems(new SP.CamlQuery());
+        clientContext.load(conItems);
+
+        clientContext.executeQueryAsync(function () {
+            var enumerator = conItems.getEnumerator();
+
+            // Since only one is possible in the list
+            if (enumerator.moveNext()) {
+                if (enumerator.get_current().get_item("Title") === "UploadLimit") {
+                    enumerator.get_current().set_item("Count", parseInt($("#uploadLimit").val()));
+                    enumerator.get_current().update();
+
+                    clientContext.executeQueryAsync(function () {
+                        $("#successModal").modal();
+                    }, onError);
+                }
+            } else {
+                // Then that constant doesn't exist
+                var itemCreateInfo = new SP.ListCreationInformation();
+                var item = appConstants.addItem(itemCreateInfo);
+                item.set_item("Title", "UploadLimit");
+                item.set_item("Count", parseInt($("#uploadLimit").val()));
+                item.update();
+
+                clientContext.executeQueryAsync(function () {
+                    $("#successModal").modal();
+                },onError)
+            }
+        }
+            , onError)
+    })
 });
 
 function loadGUI() {
