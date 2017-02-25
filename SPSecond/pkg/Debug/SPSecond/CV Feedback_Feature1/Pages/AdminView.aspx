@@ -45,6 +45,12 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-wrench"></span>&nbspSettings</button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#Overview" data-toggle="tab">Overview</a></li>
@@ -95,7 +101,7 @@
                                         <td id="career-p"></td>
                                     </tr>
                                     <tr>
-                                        <td>Masters</td>
+                                        <td>CS 3953</td>
                                         <td id="masters-nr"></td>
                                         <td id="masters-nl"></td>
                                         <td id="masters-t"></td>
@@ -156,6 +162,52 @@
                                 </tbody>
                   </table>
 
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for settings changes-->
+    <div class="modal fade" id="settingsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Change Settings</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5>Student CV upload limit</h5>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="number" id="uploadLimit" name="name" value="3" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="settingsConfirm">Confirm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Successful settings change-->
+    <div class="modal fade" id="successModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Settings Update Success</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Settings you have entered have been successfully updated.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>

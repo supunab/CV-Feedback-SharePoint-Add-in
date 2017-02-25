@@ -77,7 +77,7 @@
                 <select class="form-control select-bottom-margin" id="cvType">
                     <option value="career">Career</option>
                     <option value="internship">Internship</option>
-                    <option value="masters">Masters</option>
+                    <option value="masters">CS 3953</option>
                 </select>
             </div>
         </div>

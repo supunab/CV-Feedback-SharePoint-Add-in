@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 var dataArray = [];
-var batchArray = []; // Use custom hash function to map years to indeces; TODO -> use start year and map it to zero, then linear hashing
+var batchArray = []; // Use custom hash function to map years to indeces;
 var feedbackData = [];
 
 // Initiate Data tables
@@ -59,16 +59,16 @@ $(document).ready(function () {
                     dataArray[1][1]++;
                     break;
 
-                case "Masters Feedback Given":
+                case "CS 3953 Feedback Given":
                     dataArray[2][0]++;
                     break;
 
-                case "Masters In Process":
+                case "CS 3953 In Process":
                     dataArray[2][1]++;
                     break;
 
                 default:
-                    alert("There is a problem in the switch statement!! : " + type + " " + status);
+                    console.log("There is a problem in the switch statement!! : " + type + " " + status);
                     break;
             }
             batchArray[Number(batch) - 2013].push([name, email, type, status]);
@@ -106,6 +106,58 @@ $(document).ready(function () {
         , onError);
 
     $("#batchSelect").change(updateBatchTable);
+
+    // Settings page
+    var appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
+    var conItems = appConstants.getItems(new SP.CamlQuery());
+    clientContext.load(conItems);
+
+    clientContext.executeQueryAsync(function () {
+        var enumerator = conItems.getEnumerator();
+
+        while (enumerator.moveNext()) {
+            if (enumerator.get_current().get_item("Title") === "UploadLimit") {
+                // this is  the maximum upload count
+                $("#uploadLimit").val(enumerator.get_current().get_item("Count"));
+            }
+        }
+    },
+        onError);
+
+    $("#settingsConfirm").click(function () {
+        $("#settingsModal").modal("hide");
+        appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
+        conItems = appConstants.getItems(new SP.CamlQuery());
+        clientContext.load(conItems);
+
+        clientContext.executeQueryAsync(function () {
+            var enumerator = conItems.getEnumerator();
+
+            // Since only one is possible in the list
+            if (enumerator.moveNext()) {
+                if (enumerator.get_current().get_item("Title") === "UploadLimit") {
+                    enumerator.get_current().set_item("Count", parseInt($("#uploadLimit").val()));
+                    enumerator.get_current().update();
+
+                    clientContext.executeQueryAsync(function () {
+                        $("#successModal").modal();
+                    }, onError);
+                }
+            } else {
+                // Then that constant doesn't exist
+                var itemCreateInfo = new SP.ListCreationInformation();
+                var item = appConstants.addItem(itemCreateInfo);
+                item.set_item("Title", "UploadLimit");
+                item.set_item("Count", parseInt($("#uploadLimit").val()));
+                item.update();
+
+                clientContext.executeQueryAsync(function () {
+                    $("#successModal").modal();
+                },onError)
+            }
+        }
+            , onError)
+    })
 });
 
 function loadGUI() {
@@ -125,7 +177,7 @@ function loadGUI() {
 
 function initDataArray() {
     // 2d array
-    // 0 - Internship, 1-Career, 2-Masters
+    // 0 - Internship, 1-Career, 2-CS 3953
     // 2nd: 0 - Feedback Given; 1 = Not Given
     for (var i = 0 ; i < 3; i++) {
         dataArray.push([0, 0]);
@@ -152,52 +204,6 @@ function onError() {
     alert("Operation Failed!");
 }
 
-function calculateValues() {
-    var enumerator = cvItems.getEnumerator();
-    var current, batch, type, status;
-
-    while (enumerator.moveNext()) {
-        current = enumerator.get_current();
-        batch = current.get_item("Batch");
-        type = current.get_item("CV_x0020_Type");
-        status = current.get_item("Status");
-
-        switch (type+" "+status) {
-            case "Internship Feedback Given":
-                dataArray[0][0]++;
-                break;
-            
-            case "Internship In Progress":
-                dataArray[0][1]++;
-                break;
-
-            case "Career Feedback Given":
-                dataArray[1][0]++;
-                break;
-
-            case "Career In Progress":
-                dataArray[1][1]++;
-                break;
-
-            case "Masters Feedback Given":
-                dataArray[2][0]++;
-                break;
-
-            case "Masters In Progress":
-                dataArray[2][1]++;
-                break;
-
-            default:
-                alert("There is a problem in the switch statement!!");
-                break;
-        }
-
-        // TODO Update according to batch
-    }
-
-    updateTableView();
-}
-
 
 function updateTableView() {
     $("#internship-nr").html(String(dataArray[0][0]));
@@ -214,11 +220,11 @@ function updateTableView() {
         (100 * dataArray[1][0] / (dataArray[1][1] + dataArray[1][0])).toFixed(2)
         ));
 
-    $("#masters-nr").html(String(dataArray[1][0]));
-    $("#masters-nl").html(String(dataArray[1][1]));
-    $("#masters-t").html(String(dataArray[1][1] + dataArray[1][0]));
+    $("#masters-nr").html(String(dataArray[2][0]));
+    $("#masters-nl").html(String(dataArray[2][1]));
+    $("#masters-t").html(String(dataArray[2][1] + dataArray[2][0]));
     $("#masters-p").html(String(
-        (100 * dataArray[1][0] / (dataArray[1][1] + dataArray[1][0])).toFixed(2)
+        (100 * dataArray[2][0] / (dataArray[2][1] + dataArray[2][0])).toFixed(2)
         ));
 
     $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));

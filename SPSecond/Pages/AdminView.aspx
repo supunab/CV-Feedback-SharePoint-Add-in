@@ -101,7 +101,7 @@
                                         <td id="career-p"></td>
                                     </tr>
                                     <tr>
-                                        <td>Masters</td>
+                                        <td>CS 3953</td>
                                         <td id="masters-nr"></td>
                                         <td id="masters-nl"></td>
                                         <td id="masters-t"></td>

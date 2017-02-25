@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 var dataArray = [];
-var batchArray = []; // Use custom hash function to map years to indeces; TODO -> use start year and map it to zero, then linear hashing
+var batchArray = []; // Use custom hash function to map years to indeces;
 var feedbackData = [];
 
 // Initiate Data tables
@@ -42,6 +42,11 @@ $(document).ready(function () {
             name = current.get_item("Student_x0020_Name");
             email = current.get_item("Email");
 
+            // To detect partially uploaded files. ("Student_x0020_Name" field will be null)
+            if (name === null || batch ===null) {
+                continue;
+            }
+
             switch (type + " " + status) {
                 case "Internship Feedback Given":
                     dataArray[0][0]++;
@@ -59,16 +64,16 @@ $(document).ready(function () {
                     dataArray[1][1]++;
                     break;
 
-                case "Masters Feedback Given":
+                case "CS 3953 Feedback Given":
                     dataArray[2][0]++;
                     break;
 
-                case "Masters In Process":
+                case "CS 3953 In Process":
                     dataArray[2][1]++;
                     break;
 
                 default:
-                    alert("There is a problem in the switch statement!! : " + type + " " + status);
+                    console.log("There is a problem in the switch statement!! : " + type + " " + status);
                     break;
             }
             batchArray[Number(batch) - 2013].push([name, email, type, status]);
@@ -125,6 +130,18 @@ $(document).ready(function () {
         onError);
 
     $("#settingsConfirm").click(function () {
+        // Check negative
+        if (parseInt($("#uploadLimit").val()) < 0) {
+            alert("Upload limit cannot be a negative value");
+            return
+        }
+
+        // Check for floats
+        if (parseFloat($("#uploadLimit").val())%1!=0) {
+            alert("Upload limit cannot be a floating point number");
+            return
+        }
+
         $("#settingsModal").modal("hide");
         appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
         conItems = appConstants.getItems(new SP.CamlQuery());
@@ -177,7 +194,7 @@ function loadGUI() {
 
 function initDataArray() {
     // 2d array
-    // 0 - Internship, 1-Career, 2-Masters
+    // 0 - Internship, 1-Career, 2-CS 3953
     // 2nd: 0 - Feedback Given; 1 = Not Given
     for (var i = 0 ; i < 3; i++) {
         dataArray.push([0, 0]);
@@ -204,52 +221,6 @@ function onError() {
     alert("Operation Failed!");
 }
 
-function calculateValues() {
-    var enumerator = cvItems.getEnumerator();
-    var current, batch, type, status;
-
-    while (enumerator.moveNext()) {
-        current = enumerator.get_current();
-        batch = current.get_item("Batch");
-        type = current.get_item("CV_x0020_Type");
-        status = current.get_item("Status");
-
-        switch (type+" "+status) {
-            case "Internship Feedback Given":
-                dataArray[0][0]++;
-                break;
-            
-            case "Internship In Progress":
-                dataArray[0][1]++;
-                break;
-
-            case "Career Feedback Given":
-                dataArray[1][0]++;
-                break;
-
-            case "Career In Progress":
-                dataArray[1][1]++;
-                break;
-
-            case "Masters Feedback Given":
-                dataArray[2][0]++;
-                break;
-
-            case "Masters In Progress":
-                dataArray[2][1]++;
-                break;
-
-            default:
-                alert("There is a problem in the switch statement!!");
-                break;
-        }
-
-        // TODO Update according to batch
-    }
-
-    updateTableView();
-}
-
 
 function updateTableView() {
     $("#internship-nr").html(String(dataArray[0][0]));
@@ -266,16 +237,20 @@ function updateTableView() {
         (100 * dataArray[1][0] / (dataArray[1][1] + dataArray[1][0])).toFixed(2)
         ));
 
-    $("#masters-nr").html(String(dataArray[1][0]));
-    $("#masters-nl").html(String(dataArray[1][1]));
-    $("#masters-t").html(String(dataArray[1][1] + dataArray[1][0]));
+    $("#masters-nr").html(String(dataArray[2][0]));
+    $("#masters-nl").html(String(dataArray[2][1]));
+    $("#masters-t").html(String(dataArray[2][1] + dataArray[2][0]));
     $("#masters-p").html(String(
-        (100 * dataArray[1][0] / (dataArray[1][1] + dataArray[1][0])).toFixed(2)
+        (100 * dataArray[2][0] / (dataArray[2][1] + dataArray[2][0])).toFixed(2)
         ));
 
     $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));
     $("#feedbackCount").html(String(dataArray[0][0] + dataArray[1][0] + dataArray[2][0]));
     var value = ((dataArray[0][0] + dataArray[1][0] + dataArray[2][0]) / (dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0])).toFixed(2);
+
+    if (isNaN(value)) {
+        value = 1;
+    }
     createProgressBar(value);
     batchTable.rows.add(batchArray[0]).draw();
 }

@@ -30,6 +30,9 @@ $(document).ready(function () {
         $("#alertModal").modal();
     }
 
+    // Tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+
     // Get the add-in web and host web URLs.
     appWebUrl = decodeURIComponent(getQueryStringParameter("SPAppWebUrl"));
     hostWebUrl = decodeURIComponent(getQueryStringParameter("SPHostUrl"));
@@ -86,7 +89,8 @@ function updateLastDate() {
 
         // Get max upload count
         var appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
-        conItems = appConstants.getItems(new SP.CamlQuery());
+        var conItems = appConstants.getItems(new SP.CamlQuery());
+        clientContext.load(conItems);
 
         clientContext.executeQueryAsync(function () {
             var enumerator = conItems.getEnumerator();
@@ -108,18 +112,34 @@ function updateLastDate() {
 function limitPassed() {
     // Check upload count
     if (feedbackStatus === "Feedback Given") {
+        $("#uploadsRemaining").val(feedbackLimit - count);
         if (count >= feedbackLimit) {
             $("#uploadLimitModal").modal({
                 backdrop: 'static',
                 keyboard: false
             });
         }
+    } else {
+        $("#uploadsRemaining").val(Math.min(feedbackLimit,feedbackLimit - count + 1));
     }
 }
 
 
 function uploadFile() {
     // Check and remove currently uploaded files. (File will get uploaded inside the below fun)
+
+    // Check whether upload limit exceeded
+    if (feedbackStatus === "Feedback Given") {
+        if (count >= feedbackLimit) {
+            $("#uploadLimitModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            // exit without uploading the file
+            return;
+        }
+    }
+
     checkAndDeleteFile();
 }
 

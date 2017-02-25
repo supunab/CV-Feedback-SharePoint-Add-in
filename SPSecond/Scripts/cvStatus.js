@@ -64,6 +64,11 @@ function checkUploadAccessSuccess() {
     while (enumerator.moveNext()) {
         var item = enumerator.get_current();
         if (item.get_item("Email") === userEmail) {
+            // Check for a partially uploaded file
+            if (item.get_item("Student_x0020_Name") === null) {
+                notUploadedUI();
+                return;
+            }
             if (item.get_item("Status") === "In Process") {
                 updateNotReviewedUI();
             } else {

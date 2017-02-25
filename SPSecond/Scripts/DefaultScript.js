@@ -12,13 +12,7 @@
         while (enumerator.moveNext()) {
             var group = enumerator.get_current().get_title();
 
-            if (group === "Students") {
-                // A Student
-                window.location.replace("StudentView.aspx?" + document.URL.split("?")[1]);
-                break;
-            }
-
-            else if (group === "Admin") {
+            if (group === "Admin") {
                 // Admin person
                 window.location.replace("AdminView.aspx?" + document.URL.split("?")[1]);
                 break;
@@ -29,6 +23,12 @@
                 window.location.replace("AluminaiView.aspx?" + document.URL.split("?")[1]);
                 break;
             }
+            else {
+                // Default case is considered as a Student
+                window.location.replace("StudentView.aspx?" + document.URL.split("?")[1]);
+                break;
+            }
+
         }
 
     }, function () {

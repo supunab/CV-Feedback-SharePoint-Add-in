@@ -158,6 +158,10 @@ function checkUploadAccessSuccess() {
     while (enumerator.moveNext()) {
         var item = enumerator.get_current();
 
+        if (item.get_item("Student_x0020_Name") === null) {
+            continue;
+        }
+
         if (item.get_item('Status') === "In Process") {
             if (~isNaN(item.get_item("Feedback_x0020_Given")) && item.get_item("Feedback_x0020_Given") !== null && item.get_item("Feedback_x0020_Given") !== "") {
                 inProgressF.push(item);
