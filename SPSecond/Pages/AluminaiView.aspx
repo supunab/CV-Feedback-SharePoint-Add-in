@@ -49,18 +49,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-1 col-md-offset-2">
+            <div class="col-md-1 col-md-offset-4">
                 <h5>CV Type</h5>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <select id="cvAim" class="selectpicker btn-default form-control">
                     <option value="all" selected="selected">All</option>
                     <option value="internship">Internship</option>
                     <option value="career">Career</option>
-                    <option value="master">Master</option>
+                    <option value="CS 3953">CS 3953</option>
                 </select>
             </div>
-            <div class="col-md-3">
+            <div style="display:none;">
                 <select id="selectType" class="form-control">
                     <option value="random" selected="selected">Random</option>
                     <option value="resubmition">Re-Submision from Feedback given</option>
