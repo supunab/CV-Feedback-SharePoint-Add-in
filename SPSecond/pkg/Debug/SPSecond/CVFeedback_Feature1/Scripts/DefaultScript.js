@@ -9,32 +9,35 @@
     clientContext.executeQueryAsync(function () {
         var enumerator = groups.getEnumerator();
 
+        var redirected = false;
+
         while (enumerator.moveNext()) {
             var group = enumerator.get_current().get_title();
 
-            if (group === "Students") {
-                // A Student
-                window.location.replace("StudentView.aspx?" + document.URL.split("?")[1]);
-                break;
-            }
-
-            else if (group === "Admin") {
+            if (group === "Admin") {
                 // Admin person
                 window.location.replace("AdminView.aspx?" + document.URL.split("?")[1]);
+                redirected = true;
                 break;
             }
 
             else if (group === "Alumni") {
                 // An Aluminai person
                 window.location.replace("AluminaiView.aspx?" + document.URL.split("?")[1]);
+                redirected = true;
                 break;
             }
+
+        }
+
+        if (!redirected) {
+            // Default case is student
+            window.location.replace("StudentView.aspx?" + document.URL.split("?")[1]);
         }
 
     }, function () {
         alert("There's been some issue with getting data from the server. Try refreshing the page.");
     });
 
-    // For testing
-    //window.location.replace("AdminView.aspx?" + document.URL.split("?")[1]);
+
 });

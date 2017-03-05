@@ -42,6 +42,11 @@ $(document).ready(function () {
             name = current.get_item("Student_x0020_Name");
             email = current.get_item("Email");
 
+            // To detect partially uploaded files. ("Student_x0020_Name" field will be null)
+            if (name === null || batch ===null) {
+                continue;
+            }
+
             switch (type + " " + status) {
                 case "Internship Feedback Given":
                     dataArray[0][0]++;
@@ -125,6 +130,18 @@ $(document).ready(function () {
         onError);
 
     $("#settingsConfirm").click(function () {
+        // Check negative
+        if (parseInt($("#uploadLimit").val()) < 0) {
+            alert("Upload limit cannot be a negative value");
+            return
+        }
+
+        // Check for floats
+        if (parseFloat($("#uploadLimit").val())%1!=0) {
+            alert("Upload limit cannot be a floating point number");
+            return
+        }
+
         $("#settingsModal").modal("hide");
         appConstants = clientContext.get_web().get_lists().getByTitle("AppConstants");
         conItems = appConstants.getItems(new SP.CamlQuery());
@@ -230,6 +247,10 @@ function updateTableView() {
     $("#cvCount").html(String(dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0]));
     $("#feedbackCount").html(String(dataArray[0][0] + dataArray[1][0] + dataArray[2][0]));
     var value = ((dataArray[0][0] + dataArray[1][0] + dataArray[2][0]) / (dataArray[0][1] + dataArray[0][0] + dataArray[1][1] + dataArray[1][0] + dataArray[2][1] + dataArray[2][0])).toFixed(2);
+
+    if (isNaN(value)) {
+        value = 1;
+    }
     createProgressBar(value);
     batchTable.rows.add(batchArray[0]).draw();
 }

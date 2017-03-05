@@ -147,7 +147,7 @@ function uploadFile() {
 function onError(error) {
     //alert(error.responseText);
     $("#modalTitle").html("Error");
-    $("#modalText").html(error.responseText);
+    $("#modalText").html("An error occured during the process. This might be because of an internet connection problem. Please perform the task again. <br />" + error.responseText);
     $("#alertModal").modal();
 }
 

@@ -1,0 +1,4 @@
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\bin\Debug\CVFeedback.pdb
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\obj\Debug\CVFeedback.dll
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\obj\Debug\CVFeedback.pdb
+F:\SMB-Soft\SharepointProjects\SPSecond\SPSecond\obj\Debug\CVFeedback.csprojResolveAssemblyReference.cache

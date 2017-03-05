@@ -94,6 +94,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12"><a target="_blank" href="#" id="cvLink1"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12" id="pdf1"></div>
                         </div>
                     </div>
@@ -114,6 +117,9 @@
                             <div class="col-md-4">
                                 <input id="preview2" type="button" class="btn btn-default" onclick="doPreview(this)" value="Feedback" />
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><a target="_blank" href="#" id="cvLink2"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" id="pdf2"></div>
@@ -138,6 +144,9 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-12"><a target="_blank" href="#" id="cvLink3"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12" id="pdf3"></div>
                         </div>
                     </div>
@@ -158,6 +167,9 @@
                             <div class="col-md-4">
                                 <input id="preview4" type="button" class="btn btn-default" onclick="doPreview(this)" value="Feedback" />
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12"><a target="_blank" href="#" id="cvLink4"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" id="pdf4"></div>
@@ -191,6 +203,9 @@
                                 </div>
                                 <div class="row">
                                     <div id="number" style="display:none"></div>
+                                </div>
+                                <div>
+                                    <a href="#" target="_blank" id="modalCVLink"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> &nbspDownload CV</a>
                                 </div>
                                 <div class="row">
                                     <h4><b>Enter Feedback : </b></h4>

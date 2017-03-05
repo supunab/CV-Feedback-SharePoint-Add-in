@@ -158,6 +158,10 @@ function checkUploadAccessSuccess() {
     while (enumerator.moveNext()) {
         var item = enumerator.get_current();
 
+        if (item.get_item("Student_x0020_Name") === null) {
+            continue;
+        }
+
         if (item.get_item('Status') === "In Process") {
             if (~isNaN(item.get_item("Feedback_x0020_Given")) && item.get_item("Feedback_x0020_Given") !== null && item.get_item("Feedback_x0020_Given") !== "") {
                 inProgressF.push(item);
@@ -342,6 +346,8 @@ function setCVData(item, num) {
     var data = filePath.split("/");
     var urlTo = _spPageContextInfo.siteAbsoluteUrl + "/" + data[data.length - 2] + "/" + data[data.length - 1];
     urlTo = urlTo.replace(' ', '%20');
+    // Set the link to urlTo button
+    $("#cvLink" + num).attr("href", urlTo);
     pdf[num - 1] = urlTo;
     this.item[num - 1] = item;
     $('#pdf' + num).html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: 320px;background-position:center;"><object type="application/pdf" width="30%" height="50%" data="' + urlTo + '?#scrollbar=0&toolbar=0&navpanes=0&zoom=37" style="overflow:hidden; width: 100%; height: 90%;margin-top:20px;"></object></div>');
@@ -494,6 +500,8 @@ function doPreview(ele) {
         $('#infoDivAim').text($('#divAim' + idNum).text());
         $('#number').text('' + idNum);
         $('#feedbackTxt').val('');
+        console.log(pdf[idNum - 1]);
+        $("#modalCVLink").attr("href", pdf[idNum - 1]);
 
         $('#pdfModal').html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: ' + t + ';background-position:center;"><object type="application/pdf" width="100%" height="400px"  data="' + pdf[idNum - 1] + '?#scrollbar=0&navpanes=0" style="overflow:hidden; width: 100%; height:' + t + 'px;"></object>');
 

@@ -40,7 +40,7 @@
 <asp:Content ContentPlaceHolderId="PlaceHolderMain" runat="server">
     <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" ID="full" Title="loc:full" />
     <div class="jumnotron text-center padding-bottom">
-        <h1>Administator View</h1>
+        <h1>Admin Panel</h1>
     </div>
 
     <div class="container">
