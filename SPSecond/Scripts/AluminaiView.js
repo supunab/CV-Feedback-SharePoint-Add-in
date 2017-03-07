@@ -336,6 +336,8 @@ function showCV(list1, list2) {
 
 
 function setCVData(item, num) {
+    // Hide the loading pic
+    $("#loadingGif").hide();
     $("#div" + num).show();
     $('#divBatch' + num).text('Batch : ' + item.get_item('Batch'));
     $('#divName' + num).text(item.get_item('Student_x0020_Name'));
@@ -350,7 +352,7 @@ function setCVData(item, num) {
     $("#cvLink" + num).attr("href", urlTo);
     pdf[num - 1] = urlTo;
     this.item[num - 1] = item;
-    $('#pdf' + num).html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: 320px;background-position:center;"><object type="application/pdf" width="30%" height="50%" data="' + urlTo + '?#scrollbar=0&toolbar=0&navpanes=0&zoom=37" style="overflow:hidden; width: 100%; height: 90%;margin-top:20px;"></object></div>');
+    //$('#pdf' + num).html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: 320px;background-position:center;"><object type="application/pdf" width="30%" height="50%" data="' + urlTo + '?#scrollbar=0&toolbar=0&navpanes=0&zoom=37" style="overflow:hidden; width: 100%; height: 90%;margin-top:20px;"></object></div>');
     //$('#pdf' + num).html('<object type="application/pdf" width="30%" height="200px" data="' + urlTo + '" style="overflow:hidden; width: 100%; height: 390px;"></object>');
 }
 function setNotAvailable(num) {
@@ -363,6 +365,8 @@ function setNotAvailable(num) {
 }
 
 function doFilter(btnClicked) {
+    // Show loading pic
+    $("#loadingGif").show();
 
     var index = $('#cvAim').prop('selectedIndex');
     var aim = $('#cvAim').val();
@@ -493,17 +497,12 @@ function doPreview(ele) {
     var idNum = parseInt(id.substring(id.length - 1));
 
     if (pdf[idNum - 1] !== '') {
-        var t = $('#myModal').height() * 0.88;
-        $('#modalBody').height(t);
         $('#infoDivName').text($('#divName' + idNum).text());
         $('#infoDivBatch').text($('#divBatch' + idNum).text());
         $('#infoDivAim').text($('#divAim' + idNum).text());
         $('#number').text('' + idNum);
         $('#feedbackTxt').val('');
-        console.log(pdf[idNum - 1]);
         $("#modalCVLink").attr("href", pdf[idNum - 1]);
-
-        $('#pdfModal').html('<div style="background: transparent url(load.gif) no-repeat;width: 100%; height: ' + t + ';background-position:center;"><object type="application/pdf" width="100%" height="400px"  data="' + pdf[idNum - 1] + '?#scrollbar=0&navpanes=0" style="overflow:hidden; width: 100%; height:' + t + 'px;"></object>');
 
         $('#feedbackTxt').focus();
         $('#myModal').modal({
@@ -540,6 +539,8 @@ function updateEmptyMessage() {
     }
 
     $("#emptyMessage").show();
+    // Hide the loading image
+    $("#loadingGif").hide();
 }
 
 function sendEmailConfirmation(to) {

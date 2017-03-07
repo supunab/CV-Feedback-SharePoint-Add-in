@@ -1,11 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--Published:70EDFC97-B41D-43C5-B751-7C00AD999804-->
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--Created:cb85b80c-f585-40ff-8bfc-12ff4d0e34a9-->
-<App xmlns="http://schemas.microsoft.com/sharepoint/2012/app/manifest" Name="CVFeedback" ProductID="{7d6d69cf-5b66-4cbf-a429-054037e628f8}" Version="1.0.0.2" SharePointMinVersion="16.0.0.0">
+<App xmlns="http://schemas.microsoft.com/sharepoint/2012/app/manifest"
+     Name="CVFeedback"
+     ProductID="{7d6d69cf-5b66-4cbf-a429-054037e628f8}"
+     Version="1.0.0.2"
+     SharePointMinVersion="16.0.0.0"
+>
   <Properties>
     <Title>CVFeedback</Title>
     <StartPage>~appWebUrl/Pages/Default.aspx?{StandardTokens}</StartPage>
   </Properties>
+
   <AppPrincipal>
     <Internal />
   </AppPrincipal>

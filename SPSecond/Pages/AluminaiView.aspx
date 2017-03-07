@@ -71,12 +71,18 @@
             </div>
         </div>
         
+        <div class="row" id="loadingGif">
+            <div class="col-md-12 text-center">
+                <img src="../Images/loading.gif" alt="Loading" style="margin-top: 4%"/>
+            </div>
+        </div>
         <div class="row" id="emptyMessage">
             <div class="col-md-8 col-md-offset-2">
                 <br />
                 <h4 class="text-danger text-center">No CVs found to review</h4>
             </div>
         </div>
+
         <div id="divMain" class="row" style="margin-top: 30px">
             <div class="col-md-3" id="div1">
                 <div class="panel panel-primary">
@@ -95,9 +101,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12"><a target="_blank" href="#" id="cvLink1"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" id="pdf1"></div>
                         </div>
                     </div>
                 </div>
@@ -121,9 +124,6 @@
                         <div class="row">
                             <div class="col-md-12"><a target="_blank" href="#" id="cvLink2"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12" id="pdf2"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -145,9 +145,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12"><a target="_blank" href="#" id="cvLink3"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" id="pdf3"></div>
                         </div>
                     </div>
                 </div>
@@ -171,9 +168,6 @@
                         <div class="row">
                             <div class="col-md-12"><a target="_blank" href="#" id="cvLink4"><span class="glyphicon glyphicon-download" aria-hidden="true"></span>&nbspDownload CV</a></div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12" id="pdf4"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -181,32 +175,30 @@
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" id="modalCont" style="overflow: hidden">
+        <div class="modal-dialog modal-lg" id="modalCont">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;Close</button>
-                    <h3 class="modal-title" id="myModalLabel">Feedback Form</h3>
+                    <h4 class="modal-title">Feedback Form</h4>
                 </div>
                 <div class="modal-body" id="modalBody">
                     <div class="containter">
-                        <div class="row">
-                            <div id="pdfModal" class="col-md-8"></div>
-                            <div id="feedBackForm" class="col-md-4">
+                        <div class="row" style="margin-left:2%">
+                            <div id="feedBackForm" class="col-md-12">
                                 <div class="row">
-                                    <h4 id="infoDivName">&nbsp</h4>
-                                </div>
-                                <div class="row">
-                                    <p id="infoDivBatch"></p>
-                                </div>
-                                <div class="row">
-                                    <p id="infoDivAim"></p>
+                                    <div class="col-md-6">
+                                        <h4>Name :&nbsp<span id="infoDivName"></span></h4>
+                                        <h4 id="infoDivBatch"></h4>
+                                        <h4 id="infoDivAim"></h4>
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-2">
+                                        <a style="color : #ffffff;" class="btn btn-primary" href="#" target="_blank" id="modalCVLink"><span class="glyphicon glyphicon-download" style="font-size: 80px" aria-hidden="true"></span> &nbspDownload CV</a>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div id="number" style="display:none"></div>
                                 </div>
-                                <div>
-                                    <a href="#" target="_blank" id="modalCVLink"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> &nbspDownload CV</a>
-                                </div>
+                                <hr /> 
                                 <div class="row">
                                     <h4><b>Enter Feedback : </b></h4>
                                 </div>
@@ -217,8 +209,8 @@
 
                                 <hr />
                                 <div class="row">
-                                    <div class="col-md-3 col-md-offset-7">
-                                        <input type="button" runat="server" value="Save Feedback" onclick="return validateFeedback()" class="btn btn-info" />
+                                    <div class="text-center">
+                                        <input style="width:30%" type="button" runat="server" value="Save Feedback" onclick="return validateFeedback()" class="btn btn-info" />
                                     </div>
                                 </div>
                             </div>
